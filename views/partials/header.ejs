@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="<%= typeof lang !== 'undefined' ? lang : 'mr' %>">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+  <meta name="theme-color" content="#7F1D1D">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Malabar Hill Cha Raja">
+  <title><%= typeof title !== 'undefined' ? title : 'Malabar Hill Cha Raja | Shree Bal Gopal Ganeshutsav Mandal, Mumbai' %></title>
+  <!-- Google Search Console Ownership Verification -->
+  <meta name="google-site-verification" content="-La0Qcl3mNPWA_VzETqJiTZj5LkxDA9CygyqMylTeuY">
+  <meta name="google-site-verification" content="660I70yKDwuyHiRbH-kyytKeHowTLgUQtc67gmOonAE">
+  
+  <%
+    var defaultDesc = 'Official Portal of Malabar Hill Cha Raja (Shree Bal Gopal Ganeshutsav Mandal, Est. 1973, Reg. F-11518). Daily Ganeshotsav live darshan, schedule, historical photo gallery, social work & 80G tax exempt donations.';
+    var pageDesc = typeof metaDescription !== 'undefined' ? metaDescription : defaultDesc;
+    var currentTabName = typeof activeTab !== 'undefined' ? activeTab : 'home';
+    var currentPath = currentTabName !== 'home' 
+      ? (currentTabName === 'socialwork' ? '/social-work' : currentTabName === 'photobooth' ? '/glimpses' : '/' + currentTabName) 
+      : '';
+    var canonicalUrl = 'https://malabarhillcharaja.in' + currentPath;
+
+    var breadcrumbs = [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://malabarhillcharaja.in/" }
+    ];
+    if (currentTabName !== 'home') {
+      var tabLabelMap = {
+        'about': 'About Us',
+        'schedule': 'Schedule',
+        'glimpses': 'Glimpses',
+        'photobooth': 'Glimpses',
+        'socialwork': 'Social Work',
+        'committee': 'Committee',
+        'advertisement': 'Advertisement',
+        'contact': 'Contact',
+        'tshirt': 'Official T-Shirt',
+        'donate': 'Donate'
+      };
+      var label = tabLabelMap[currentTabName] || 'Page';
+      breadcrumbs.push({
+        "@type": "ListItem",
+        "position": 2,
+        "name": label,
+        "item": canonicalUrl
+      });
+    }
+  %>
+  <meta name="description" content="<%= pageDesc %>">
+  <!-- Canonical & Open Graph Meta Tags -->
+  <link rel="canonical" href="<%= canonicalUrl %>">
+  <meta property="og:title" content="<%= typeof title !== 'undefined' ? title : 'Malabar Hill Cha Raja | Shree Bal Gopal Ganeshutsav Mandal' %>">
+  <meta property="og:description" content="<%= pageDesc %>">
+  <meta property="og:image" content="https://malabarhillcharaja.in/images/malabar_ganpati_01.jpg">
+  <meta property="og:url" content="<%= canonicalUrl %>">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Malabar Hill Cha Raja">
+  <meta property="og:locale" content="<%= typeof lang !== 'undefined' && lang === 'mr' ? 'mr_IN' : 'en_US' %>">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<%= typeof title !== 'undefined' ? title : 'Malabar Hill Cha Raja | Shree Bal Gopal Ganeshutsav Mandal' %>">
+  <meta name="twitter:description" content="<%= pageDesc %>">
+  <meta name="twitter:image" content="https://malabarhillcharaja.in/images/malabar_ganpati_01.jpg">
+
+  <!-- LCP Image Preload for Instant First Contentful Render -->
+  <link rel="preload" as="image" href="/images/malabar_ganpati_new1.webp" type="image/webp" fetchpriority="high">
+  
+  <!-- JSON-LD Structured Data Schema for Google Search & AI Systems -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://malabarhillcharaja.in/#website",
+        "url": "https://malabarhillcharaja.in/",
+        "name": "Malabar Hill Cha Raja Official Website",
+        "description": "Official Portal of Malabar Hill Cha Raja - Shree Bal Gopal Ganeshutsav Mandal"
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://malabarhillcharaja.in/#organization",
+        "name": "Shree Bal Gopal Ganeshutsav Mandal",
+        "alternateName": "Malabar Hill Cha Raja",
+        "url": "https://malabarhillcharaja.in/",
+        "logo": "https://malabarhillcharaja.in/images/logo.png",
+        "foundingDate": "1973",
+        "identifier": "Reg. No. F-11518",
+        "email": "mcrofficial1973@gmail.com",
+        "telephone": "+919326150793",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Ganesh Chowk, Bhaji Galli, Shankar Sheth Road, Grant Road (W)",
+          "addressLocality": "Mumbai",
+          "addressRegion": "Maharashtra",
+          "postalCode": "400007",
+          "addressCountry": "IN"
+        },
+        "sameAs": [
+          "https://www.youtube.com/@MalabarHillChaRaja-e2z",
+          "https://www.facebook.com/malabarhillcharaja",
+          "https://www.instagram.com/malabarhill_cha_raja/"
+        ]
+      },
+      {
+        "@type": "HinduTemple",
+        "@id": "https://malabarhillcharaja.in/#temple",
+        "name": "Malabar Hill Cha Raja Mandap",
+        "alternateName": "Shree Bal Gopal Ganeshutsav Mandal",
+        "url": "https://malabarhillcharaja.in/",
+        "image": "https://malabarhillcharaja.in/images/malabar_ganpati_01.jpg",
+        "telephone": "+919326150793",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Ganesh Chowk, Bhaji Galli, Shankar Sheth Road, Grant Road (West)",
+          "addressLocality": "Mumbai",
+          "addressRegion": "Maharashtra",
+          "postalCode": "400007",
+          "addressCountry": "IN"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 18.9634,
+          "longitude": 72.8156
+        },
+        "openingHours": "Mo-Su 06:00-00:00"
+      },
+      {
+        "@type": "Event",
+        "@id": "https://malabarhillcharaja.in/#event-2026",
+        "name": "Malabar Hill Cha Raja Ganeshotsav Festival 2026",
+        "description": "Grand 12-day Ganeshotsav festival featuring daily Maha Aarti, 50,000+ Annadan Mahaprasad, cultural programs, and visarjan procession.",
+        "startDate": "2026-09-14T08:00:00+05:30",
+        "endDate": "2026-09-25T22:00:00+05:30",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Ganesh Chowk Mandap",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Ganesh Chowk, Bhaji Galli, Grant Road (W)",
+            "addressLocality": "Mumbai",
+            "postalCode": "400007",
+            "addressCountry": "IN"
+          }
+        },
+        "organizer": {
+          "@type": "Organization",
+          "name": "Shree Bal Gopal Ganeshutsav Mandal",
+          "url": "https://malabarhillcharaja.in/"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "<%= canonicalUrl %>#breadcrumb",
+        "itemListElement": <%- JSON.stringify(breadcrumbs) %>
+      }
+    ]
+  }
+  </script>
+  
+  <!-- Google Web Fonts & Devanagari Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Noto+Serif+Devanagari:wght@400;600&family=Outfit:wght@400;600;700&family=Baloo+2:wght@600;700&display=swap" rel="stylesheet">
+  
+  <!-- Non-render-blocking Icon Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  </noscript>
+
+  <!-- Canvas Confetti Library for Celebrations -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <!-- Internationalization System -->
+  <script>
+    (function(){
+      try {
+        var saved = localStorage.getItem('mcc_lang');
+        var cookieMatch = document.cookie.match(/mcc_lang=(mr|en)/);
+        var l = saved || (cookieMatch ? cookieMatch[1] : '<%= typeof lang !== "undefined" ? lang : "en" %>');
+        document.documentElement.lang = l;
+        document.documentElement.setAttribute('data-lang', l);
+        document.cookie = "mcc_lang=" + l + "; path=/; max-age=31536000; SameSite=Lax";
+      } catch(e){}
+    })();
+  </script>
+  <script src="/js/i18n.min.js?v=20260901_origgrad" defer></script>
+  <!-- Malabar Hill Cha Raja Stylesheet -->
+  <link rel="stylesheet" href="/css/style.min.css?v=20260901_origgrad">
+  <link rel="icon" type="image/webp" href="/images/logo.webp">
+</head>
+<body>
+
+  <!-- Studio Custom Interactive Follower Cursor -->
+  <div class="custom-cursor-dot" id="customCursorDot"></div>
+  <div class="custom-cursor-outline" id="customCursorOutline"></div>
+
+  <!-- Mandal Top Header Banner -->
+  <div class="topbar-chintamani top-utility-bar" id="topUtilityBar">
+    <div class="container">
+      <div class="mandal-top-banner-flex">
+        <!-- Top Meta (Est & Reg & Social Links) -->
+        <div class="mandal-top-meta">
+          <span class="est-text">
+            <span class="lang-mr">स्थापना : १९७३</span>
+            <span class="lang-en">Est. Year: 1973</span>
+          </span>
+          
+          <div class="mandal-top-meta-actions">
+            <a href="https://www.youtube.com/@MalabarHillChaRaja-e2z" target="_blank" rel="noopener noreferrer" class="social-link yt-link">
+              <i class="fa-brands fa-youtube" style="color: #FF0000;"></i> <span>YouTube</span>
+            </a>
+            <a href="https://www.facebook.com/malabarhillcharaja" target="_blank" rel="noopener noreferrer" class="social-link fb-link">
+              <i class="fa-brands fa-facebook" style="color: #1877F2;"></i> <span>Facebook</span>
+            </a>
+            <a href="https://www.instagram.com/malabarhill_cha_raja/" target="_blank" rel="noopener noreferrer" class="social-link insta-link">
+              <i class="fa-brands fa-instagram" style="color: var(--royal-gold);"></i> <span class="insta-full">@malabarhill_cha_raja</span><span class="insta-short">Instagram</span>
+            </a>
+            <!-- Language Switcher Pills -->
+            <div class="lang-switcher-container">
+              <button class="lang-btn <%= typeof lang !== 'undefined' && lang === 'mr' ? 'active' : '' %>" data-lang="mr">मराठी</button>
+              <button class="lang-btn <%= typeof lang === 'undefined' || lang === 'en' ? 'active' : '' %>" data-lang="en">English</button>
+            </div>
+          </div>
+
+          <span class="reg-text">
+            <span class="lang-mr">नोंदणी क्र. : एफ-११५१८</span>
+            <span class="lang-en">Reg No F-11518</span>
+          </span>
+        </div>
+
+        <!-- Mandal Devanagari Heading -->
+        <h1 class="mandal-banner-3d-text">
+          <span class="lang-mr">श्री बाल गोपाल गणेशोत्सव मंडळ, मुंबई</span>
+          <span class="lang-en">Shree Bal Gopal Ganeshutsav Mandal, Mumbai</span>
+        </h1>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Site Sticky Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <!-- Official Mandal Logo Crest with Motion Frame -->
+      <a href="/" class="brand-logo">
+        <div class="logo-motion-wrapper">
+          <div class="logo-motion-ring"></div>
+          <picture>
+            <source srcset="/images/logo.webp" type="image/webp">
+            <img src="/images/logo.png" alt="Malabar Hill Cha Raja Logo" width="60" height="60" style="width: 100%; height: 100%; object-fit: contain; position: relative; z-index: 1;" loading="eager">
+          </picture>
+        </div>
+        <div class="brand-text">
+          <h2>
+            <span class="lang-mr">मलबार हिलचा राजा</span>
+            <span class="lang-en">Malabar Hill Cha Raja</span>
+          </h2>
+          <p>
+            <span class="lang-mr">श्री बाल गोपाल गणेशोत्सव मंडळ</span>
+            <span class="lang-en">Shree Bal Gopal Ganeshutsav Mandal</span>
+          </p>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="main-nav" id="mainNav">
+        <ul>
+          <li>
+            <a href="https://www.youtube.com/@MalabarHillChaRaja-e2z" target="_blank" rel="noopener noreferrer" class="btn btn-outline nav-live-btn">
+              <i class="fa-solid fa-tower-broadcast" style="color: var(--primary-saffron);"></i>
+              <span class="lang-mr">थेट दर्शन</span>
+              <span class="lang-en">LIVE DARSHAN</span>
+            </a>
+          </li>
+          <li><a href="/" class="nav-link <%= activeTab === 'home' ? 'active' : '' %>">
+            <span class="lang-mr">मुखपृष्ठ</span><span class="lang-en">Home</span>
+          </a></li>
+          <li><a href="/about" class="nav-link <%= activeTab === 'about' ? 'active' : '' %>">
+            <span class="lang-mr">आमच्याबद्दल</span><span class="lang-en">About Us</span>
+          </a></li>
+          <li><a href="/schedule" class="nav-link <%= activeTab === 'schedule' ? 'active' : '' %>">
+            <span class="lang-mr">वेळापत्रक</span><span class="lang-en">Schedule</span>
+          </a></li>
+          <li><a href="/glimpses" class="nav-link <%= activeTab === 'glimpses' || activeTab === 'photobooth' ? 'active' : '' %>">
+            <span class="lang-mr">क्षणचित्रे</span><span class="lang-en">Glimpses</span>
+          </a></li>
+          <li><a href="/social-work" class="nav-link <%= activeTab === 'socialwork' ? 'active' : '' %>">
+            <span class="lang-mr">सामाजिक कार्य</span><span class="lang-en">Social Work</span>
+          </a></li>
+          <li><a href="/tshirt" class="nav-link <%= activeTab === 'tshirt' ? 'active' : '' %>">
+            <span class="lang-mr">टी-शर्ट</span><span class="lang-en">Official T-Shirt</span>
+          </a></li>
+          <li><a href="/committee" class="nav-link <%= activeTab === 'committee' ? 'active' : '' %>">
+            <span class="lang-mr">कार्यकारिणी</span><span class="lang-en">Committee</span>
+          </a></li>
+          <li><a href="/advertisement" class="nav-link <%= activeTab === 'advertisement' ? 'active' : '' %>">
+            <span class="lang-mr">जाहिरात</span><span class="lang-en">Advertisement</span>
+          </a></li>
+          <li><a href="/contact" class="nav-link <%= activeTab === 'contact' ? 'active' : '' %>">
+            <span class="lang-mr">संपर्क</span><span class="lang-en">Contact</span>
+          </a></li>
+          
+          <!-- Distinct Donate Button -->
+          <li class="nav-donate-item">
+            <a href="/donate" class="btn btn-primary nav-donate-btn">
+              <span class="lang-mr">देणगी</span><span class="lang-en">Donate Now</span>
+            </a>
+          </li>
+
+          <!-- Mobile Language Switcher (Visible only in hamburger menu) -->
+          <li class="mobile-lang-switcher-item">
+            <div class="lang-switcher-container mobile-nav-lang">
+              <button class="lang-btn <%= typeof lang !== 'undefined' && lang === 'mr' ? 'active' : '' %>" data-lang="mr">मराठी</button>
+              <button class="lang-btn <%= typeof lang === 'undefined' || lang === 'en' ? 'active' : '' %>" data-lang="en">English</button>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Mobile Navigation Toggle -->
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+        <i class="bi bi-list"></i>
+      </button>
+    </div>
+  </header>

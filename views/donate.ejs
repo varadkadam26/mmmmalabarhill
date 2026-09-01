@@ -1,0 +1,289 @@
+<%- include('partials/header') %>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+  <section class="page-hero-banner">
+    <div class="container">
+      <h1 data-i18n="donate_title">ऑनलाइन देणगी पोर्टल</h1>
+    </div>
+  </section>
+
+  <section class="main-content-gradient" style="padding: 5rem 0;">
+    <div class="container" style="max-width: 850px;">
+
+      <div class="card-temple" style="padding: 3rem;">
+        <h2 style="font-size: 1.8rem; color: var(--temple-maroon); margin-bottom: 1.5rem; text-align: center;"
+          data-i18n="donate_form_title">
+          देणगी फॉर्म
+        </h2>
+
+        <form id="donationForm">
+          <!-- Custom Amount -->
+          <div style="margin-bottom: 1.5rem;">
+            <label
+              style="display: block; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text-main);"
+              data-i18n="lbl_custom_amount">
+              देणगी रक्कम टाका (₹) *
+            </label>
+            <input type="number" id="donationAmount" min="11" required
+              style="width: 100%; padding: 0.85rem 1.2rem; border-radius: var(--radius-sm); border: 1px solid var(--border-gold); font-size: 1.1rem; font-weight: 700; color: var(--temple-maroon);">
+          </div>
+
+          <!-- Donor Name -->
+          <div style="margin-bottom: 1.5rem;">
+            <label
+              style="display: block; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text-main);"
+              data-i18n="lbl_donor_name">
+              देणगीदाराचे संपूर्ण नाव *
+            </label>
+            <input type="text" id="donorName" required placeholder="संपूर्ण नाव टाका" data-i18n="ph_donor_name"
+              style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-gold); font-size: 0.95rem;">
+          </div>
+
+          <!-- Contact Phone -->
+          <div class="form-grid-2" style="margin-bottom: 1.5rem;">
+            <div>
+              <label
+                style="display: block; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text-main);"
+                data-i18n="lbl_mobile">
+                मोबाईल नंबर *
+              </label>
+              <input type="tel" id="donorPhone" required placeholder="१० अंकी मोबाईल नंबर" data-i18n="ph_mobile"
+                style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-gold); font-size: 0.95rem;">
+            </div>
+
+            <div>
+              <label
+                style="display: block; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text-main);"
+                data-i18n="lbl_email">
+                ईमेल आयडी (पर्यायी)
+              </label>
+              <input type="email" id="donorEmail" placeholder="पावतीसाठी ईमेल" data-i18n="ph_email"
+                style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-gold); font-size: 0.95rem;">
+            </div>
+          </div>
+
+          <!-- PAN Card (Optional for 80G) -->
+          <div style="margin-bottom: 2rem;">
+            <label
+              style="display: block; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text-main);"
+              data-i18n="lbl_pan">
+              पॅन कार्ड नंबर (८०जी कर सवलत पावतीसाठी)
+            </label>
+            <input type="text" id="donorPan" placeholder="उदा. ABCDE1234F" data-i18n="ph_pan"
+              style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-gold); font-size: 0.95rem; text-transform: uppercase;">
+          </div>
+
+          <button type="submit" class="btn btn-primary"
+            style="width: 100%; padding: 1rem; font-size: clamp(0.9rem, 4vw, 1.1rem); font-weight: 800; white-space: normal; line-height: 1.3;" id="btnDonateSubmit">
+            <span data-i18n="btn_donate_submit">देणगी द्या व पावती मिळवा</span> <i
+              class="bi bi-shield-check"></i>
+          </button>
+        </form>
+      </div>
+      <!-- UPI Scan & Pay Card Section -->
+      <div class="card-temple" style="padding: 2.5rem; margin-top: 3rem; text-align: center; background: #FFFFFF; border: 2px solid var(--royal-gold); box-shadow: var(--shadow-md);">
+        <div style="background: rgba(212, 175, 55, 0.1); border-radius: var(--radius-md); padding: 1rem 1.5rem; margin-bottom: 1.5rem; display: inline-block;">
+          <span style="font-size: 0.85rem; font-weight: 800; text-transform: uppercase; color: var(--primary-saffron); letter-spacing: 1px;">
+            SVC CO-OPERATIVE BANK LTD.
+          </span>
+          <h3 style="font-size: 1.4rem; color: var(--temple-maroon); margin: 0.2rem 0 0; font-family: var(--font-en-head);">
+            SCAN & PAY VIA UPI
+          </h3>
+        </div>
+
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1.5rem;">
+          <div style="padding: 12px; background: #FFFFFF; border: 2px solid var(--royal-gold); border-radius: 12px; box-shadow: var(--shadow-sm); display: inline-block;">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=upi%3A%2F%2Fpay%3Fpa%3DSVCMERC00301799%40svcbank%26pn%3DShree%2520Bal%2520Gopal%2520Ganeshutsav%2520Mandal%26cu%3DINR" 
+              alt="SVC Bank UPI QR Code for Malabar Hill Cha Raja" 
+              style="width: 200px; height: 200px; display: block;">
+          </div>
+          
+          <div style="background: var(--bg-cream); border: 1.5px solid var(--border-gold); padding: 0.8rem 1.4rem; border-radius: 50px; display: inline-flex; align-items: center; gap: 10px; max-width: 100%;">
+            <i class="fa-solid fa-qrcode" style="color: var(--primary-saffron); font-size: 1.2rem;"></i>
+            <span style="font-family: monospace; font-size: 1.05rem; font-weight: 800; color: var(--temple-maroon); word-break: break-all;" id="textUpiId">
+              SVCMERC00301799@svcbank
+            </span>
+            <button type="button" onclick="navigator.clipboard.writeText('SVCMERC00301799@svcbank'); alert('UPI ID Copied: SVCMERC00301799@svcbank');" 
+              style="background: var(--temple-maroon); color: #FFF; border: none; padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; cursor: pointer; white-space: nowrap;">
+              <i class="fa-regular fa-copy"></i> Copy
+            </button>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: center; align-items: center; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">
+          <span><i class="fa-solid fa-check-circle" style="color: #16A34A;"></i> Google Pay</span>
+          <span><i class="fa-solid fa-check-circle" style="color: #16A34A;"></i> PhonePe</span>
+          <span><i class="fa-solid fa-check-circle" style="color: #16A34A;"></i> Paytm</span>
+          <span><i class="fa-solid fa-check-circle" style="color: #16A34A;"></i> BHIM UPI</span>
+        </div>
+      </div>
+
+      <!-- Bank Details Section -->
+      <div class="card-temple" style="padding: 3rem; margin-top: 2.5rem;">
+        <h2 style="font-size: 1.8rem; color: var(--temple-maroon); margin-bottom: 1.5rem; text-align: center;">
+          <span data-i18n="bank_details_title">बँक खाते तपशील / Bank Account Details</span>
+        </h2>
+        
+        <div style="background: var(--bg-cream); border: 1px solid var(--border-gold); padding: 2rem; border-radius: var(--radius-sm); font-size: 1.1rem; line-height: 1.8; color: var(--text-dark);">
+          <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; border-bottom: 1px dashed var(--border-gold); padding-bottom: 0.5rem;">
+              <strong style="color: var(--temple-maroon);"><span data-i18n="bank_name_lbl">बँकेचे नाव:</span></strong>
+              <span>SVC Co-Operative Bank Ltd.</span>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; border-bottom: 1px dashed var(--border-gold); padding-bottom: 0.5rem;">
+              <strong style="color: var(--temple-maroon);"><span data-i18n="acc_name_lbl">खात्याचे नाव:</span></strong>
+              <span>Shree Bal Gopal Ganeshutsav Mandal (Bal Gopal Mandal)</span>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; border-bottom: 1px dashed var(--border-gold); padding-bottom: 0.5rem;">
+              <strong style="color: var(--temple-maroon);"><span>UPI ID:</span></strong>
+              <span style="font-family: monospace; font-size: 1.15rem; font-weight: bold; color: var(--primary-saffron);">SVCMERC00301799@svcbank</span>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; border-bottom: 1px dashed var(--border-gold); padding-bottom: 0.5rem;">
+              <strong style="color: var(--temple-maroon);"><span data-i18n="acc_no_lbl">खाते क्रमांक:</span></strong>
+              <span style="font-family: monospace; font-size: 1.2rem; font-weight: bold;">100903130041974</span>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; border-bottom: 1px dashed var(--border-gold); padding-bottom: 0.5rem;">
+              <strong style="color: var(--temple-maroon);"><span data-i18n="ifsc_lbl">आयएफएससी कोड:</span></strong>
+              <span style="font-family: monospace; font-size: 1.2rem; font-weight: bold;">SVCB0000009</span>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; border-bottom: 1px dashed var(--border-gold); padding-bottom: 0.5rem;">
+              <strong style="color: var(--temple-maroon);"><span data-i18n="branch_lbl">शाखा:</span></strong>
+              <span>Sleater Road</span>
+            </div>
+          </div>
+        </div>
+        <p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: #666;">
+          <i class="bi bi-info-circle"></i> <span data-i18n="bank_transfer_note">थेट बँक ट्रान्सफर किंवा UPI ने देणगी दिल्यानंतर पावतीसाठी कृपया आम्हाला संपर्क करा.</span>
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const amountInput = document.getElementById('donationAmount');
+
+      document.getElementById('donationForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById('btnDonateSubmit');
+        const btnTextSpan = btn.querySelector('span');
+        btn.disabled = true;
+
+        const currentLang = (typeof localStorage !== 'undefined' && localStorage.getItem('mcc_lang')) || 'mr';
+        const processingMsg = currentLang === 'en' ? 'Donation processing in progress...' : 'देणगी प्रक्रिया सुरू आहे...';
+        const successMsg = currentLang === 'en' ? 'Donation successful! Your 80G PDF receipt is downloading.' : 'देणगी यशस्वी झाली! तुमची ८०जी पावती डाऊनलोड होत आहे.';
+
+        if (btnTextSpan) {
+          btnTextSpan.textContent = processingMsg;
+        } else {
+          btn.textContent = processingMsg;
+        }
+
+        const amountVal = parseFloat(amountInput.value);
+        const donorName = document.getElementById('donorName').value;
+        const donorPhone = document.getElementById('donorPhone').value;
+        const donorEmail = document.getElementById('donorEmail').value;
+        const donorPan = document.getElementById('donorPan').value;
+
+        try {
+          // Step 1: Create Order via Backend Razorpay SDK
+          const orderRes = await fetch('/api/create-donation-order', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ amount: amountVal })
+          });
+          const orderData = await orderRes.json();
+
+          if (!orderData.success) {
+            alert(orderData.message || 'Failed to initiate donation.');
+            btn.disabled = false;
+            if (typeof setLanguage === 'function') setLanguage(currentLang);
+            return;
+          }
+
+          // Helper to finalize confirmation
+          async function completeDonation(payId, ordId, sig) {
+            const confirmRes = await fetch('/api/confirm-donation', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                receipt_no: orderData.receipt_no,
+                donor_name: donorName,
+                phone: donorPhone,
+                email: donorEmail,
+                amount: amountVal,
+                pan_number: donorPan,
+                payment_id: payId,
+                order_id: ordId,
+                signature: sig
+              })
+            });
+            const confirmData = await confirmRes.json();
+            if (confirmData.success) {
+              alert(successMsg);
+              window.location.href = `/download-receipt/${confirmData.receipt_no}`;
+            } else {
+              alert(confirmData.message || 'Payment verification failed.');
+              btn.disabled = false;
+              if (typeof setLanguage === 'function') setLanguage(currentLang);
+            }
+          }
+
+          // Step 2: Open Razorpay Official Checkout UI Popup if script loaded
+          const razorpayKey = (orderData.order && orderData.order.key_id) || '<%= typeof razorpayKeyId !== "undefined" ? razorpayKeyId : "" %>';
+
+          if (typeof window.Razorpay !== 'undefined' && razorpayKey) {
+            const options = {
+              key: razorpayKey,
+              amount: orderData.order ? orderData.order.amount : Math.round(amountVal * 100),
+              currency: 'INR',
+              name: 'Malabar Hill Cha Raja',
+              description: 'Ganeshotsav Seva Donation (80G Tax Exempt)',
+              image: '/images/logo.png',
+              order_id: orderData.order ? orderData.order.order_id : '',
+              prefill: {
+                name: donorName,
+                email: donorEmail,
+                contact: donorPhone
+              },
+              theme: {
+                color: '#7F1D1D'
+              },
+              handler: function (response) {
+                completeDonation(
+                  response.razorpay_payment_id,
+                  response.razorpay_order_id,
+                  response.razorpay_signature
+                );
+              },
+              modal: {
+                ondismiss: function () {
+                  btn.disabled = false;
+                  if (typeof setLanguage === 'function') setLanguage(currentLang);
+                }
+              }
+            };
+
+            const rzp = new window.Razorpay(options);
+            rzp.open();
+          } else {
+            // Fallback test simulation if Checkout JS is blocked
+            await completeDonation(
+              `pay_sim_${Date.now()}`,
+              orderData.order ? orderData.order.order_id : `order_sim_${Date.now()}`,
+              `sig_sim_${Date.now()}`
+            );
+          }
+
+        } catch (err) {
+          console.error('Donation error:', err);
+          alert('Error submitting donation.');
+          btn.disabled = false;
+          if (typeof setLanguage === 'function') setLanguage(currentLang);
+        }
+      });
+    });
+  </script>
+
+  <%- include('partials/footer') %>

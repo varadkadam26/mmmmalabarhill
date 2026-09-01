@@ -1,0 +1,181 @@
+<%- include('partials/header') %>
+
+  <section class="page-hero-banner">
+    <div class="container">
+      <span class="section-badge">
+        <span class="lang-mr">समाजोपयोगी उपक्रम</span>
+        <span class="lang-en">Community Social Service</span>
+      </span>
+      <h1>
+        <span class="lang-mr">सामाजिक कार्य व उपक्रम</span>
+        <span class="lang-en">Social Work & Initiatives</span>
+      </h1>
+      <p>
+        <span class="lang-mr">अन्नदान महाप्रसाद, रक्तदान शिबीर, मोफत आरोग्य तपासणी आणि शैक्षणिक मदतीतून समाजसेवा.</span>
+        <span class="lang-en">Serving humanity through food distribution, blood donation, free health checkups, and educational aid.</span>
+      </p>
+    </div>
+  </section>
+  <style>
+    .social-card {
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-gold);
+      padding: 2.5rem;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+      box-sizing: border-box;
+    }
+    .social-card.row-reverse {
+      flex-direction: row-reverse;
+    }
+    .social-badges {
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .social-text {
+      flex: 1;
+      min-width: 300px;
+      box-sizing: border-box;
+    }
+    .social-img-container {
+      flex: 1;
+      min-width: 300px;
+      height: 320px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 3px solid var(--royal-gold);
+      box-shadow: var(--shadow-sm);
+      box-sizing: border-box;
+    }
+    @media (max-width: 768px) {
+      .social-card, .social-card.row-reverse {
+        flex-direction: column-reverse !important;
+        padding: 1.5rem;
+      }
+      .social-card > div {
+        min-width: 0 !important;
+        width: 100%;
+      }
+      .social-text {
+        text-align: center;
+      }
+      .social-badges {
+        justify-content: center;
+      }
+      .social-img-container {
+        height: 220px;
+      }
+    }
+  </style>
+  <section class="main-content-gradient" style="padding: 5rem 0;">
+    <div class="container">
+      <div style="display: flex; flex-direction: column; gap: 3.5rem;">
+        <% socialWorkData.forEach((work, idx)=> { %>
+          <div class="social-card <%= idx % 2 !== 0 ? 'row-reverse' : '' %>">
+            <div class="social-text">
+              <div class="social-badges">
+                <span
+                  style="font-size: 0.82rem; font-weight: 800; color: var(--primary-saffron); text-transform: uppercase; background: var(--saffron-light); padding: 4px 12px; border-radius: var(--radius-full);">
+                  <span data-mr="<%= work.categoryMr || work.category %>" data-en="<%= work.categoryEn || work.category %>"><%= work.categoryMr || work.category %></span>
+                </span>
+                <% if(work.date) { %>
+                  <span
+                    style="font-size: 0.82rem; font-weight: 700; color: #555; text-transform: uppercase; background: #e0e0e0; padding: 4px 12px; border-radius: var(--radius-full);">
+                    <i class="bi bi-calendar3" style="margin-right: 4px;"></i>
+                    <span data-mr="<%= work.dateMr || work.date %>" data-en="<%= work.dateEn || work.date %>"><%= work.dateMr || work.date %></span>
+                  </span>
+                <% } %>
+              </div>
+              <h2 style="font-size: 1.9rem; color: var(--temple-maroon); margin: 0.8rem 0 1rem;">
+                <span data-mr="<%= work.titleMr || work.title %>" data-en="<%= work.titleEn || work.title %>"><%= work.titleMr || work.title %></span>
+              </h2>
+            </div>
+            <div class="social-img-container" style="display: flex; align-items: center; justify-content: center; background: #000;">
+              <picture>
+                <source srcset="<%= work.image.replace(/\.(jpg|jpeg|png)$/, '.webp') %>" type="image/webp">
+                <img src="<%= work.image %>" alt="<%= work.titleMr || work.title %>" width="400" height="320" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+              </picture>
+            </div>
+          </div>
+          <% }); %>
+      </div>
+
+      <!-- Social Media Personnel Section -->
+      <div style="margin-top: 5rem; text-align: center;">
+        <div class="section-header" style="margin-bottom: 2.5rem;">
+          <span class="section-badge">
+            <span class="lang-mr">डिजिटल प्रसिद्धी व मीडिया टीम</span>
+            <span class="lang-en">Digital Media & Public Relations</span>
+          </span>
+          <h2 class="section-title">
+            <span class="lang-mr">सोशल मीडिया प्रतिनिधी</span>
+            <span class="lang-en">Social Media Personnel</span>
+          </h2>
+          <div class="gold-divider"></div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 960px; margin: 0 auto;">
+          <!-- Rajesh Patel -->
+          <div class="card-temple" style="text-align: center; padding: 2rem 1.5rem; background: var(--bg-white); border-radius: var(--radius-lg); border: 1.5px solid var(--border-gold); box-shadow: var(--shadow-sm); transition: transform 0.3s ease;">
+            <div style="width: 130px; height: 130px; margin: 0 auto 1.2rem; border-radius: 50%; overflow: hidden; border: 3px solid var(--royal-gold); box-shadow: var(--shadow-sm);">
+              <picture>
+                <source srcset="/images/social/rajesh_patel.webp" type="image/webp">
+                <img src="/images/social/rajesh_patel.jpg" alt="Shri Rajesh Patel" width="130" height="130" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; object-position: center top;">
+              </picture>
+            </div>
+            <h3 style="font-size: 1.25rem; color: var(--temple-maroon); margin-bottom: 0.3rem;">
+              <span class="lang-mr">श्री. राजेश पटेल</span>
+              <span class="lang-en">Shri Rajesh Patel</span>
+            </h3>
+            <p style="font-size: 0.88rem; font-weight: 700; color: var(--primary-saffron); text-transform: uppercase; margin: 0;">
+              <span class="lang-mr">सोशल मीडिया प्रतिनिधी</span>
+              <span class="lang-en">Social Media Personnel</span>
+            </p>
+          </div>
+
+          <!-- Jayesh Taralkar -->
+          <div class="card-temple" style="text-align: center; padding: 2rem 1.5rem; background: var(--bg-white); border-radius: var(--radius-lg); border: 1.5px solid var(--border-gold); box-shadow: var(--shadow-sm); transition: transform 0.3s ease;">
+            <div style="width: 130px; height: 130px; margin: 0 auto 1.2rem; border-radius: 50%; overflow: hidden; border: 3px solid var(--royal-gold); box-shadow: var(--shadow-sm);">
+              <picture>
+                <source srcset="/images/social/jayesh_taralkar.webp" type="image/webp">
+                <img src="/images/social/jayesh_taralkar.jpg" alt="Shri Jayesh Taralkar" width="130" height="130" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; object-position: center top;">
+              </picture>
+            </div>
+            <h3 style="font-size: 1.25rem; color: var(--temple-maroon); margin-bottom: 0.3rem;">
+              <span class="lang-mr">श्री. जयेश तारळकर</span>
+              <span class="lang-en">Shri Jayesh Taralkar</span>
+            </h3>
+            <p style="font-size: 0.88rem; font-weight: 700; color: var(--primary-saffron); text-transform: uppercase; margin: 0;">
+              <span class="lang-mr">सोशल मीडिया प्रतिनिधी</span>
+              <span class="lang-en">Social Media Personnel</span>
+            </p>
+          </div>
+
+          <!-- Sarvesh Sangle -->
+          <div class="card-temple" style="text-align: center; padding: 2rem 1.5rem; background: var(--bg-white); border-radius: var(--radius-lg); border: 1.5px solid var(--border-gold); box-shadow: var(--shadow-sm); transition: transform 0.3s ease;">
+            <div style="width: 130px; height: 130px; margin: 0 auto 1.2rem; border-radius: 50%; overflow: hidden; border: 3px solid var(--royal-gold); box-shadow: var(--shadow-sm);">
+              <picture>
+                <source srcset="/images/social/sarvesh_sangle.webp" type="image/webp">
+                <img src="/images/social/sarvesh_sangle.jpg" alt="Shri Sarvesh Sangle" width="130" height="130" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; object-position: center top;">
+              </picture>
+            </div>
+            <h3 style="font-size: 1.25rem; color: var(--temple-maroon); margin-bottom: 0.3rem;">
+              <span class="lang-mr">श्री. सर्वेश सांगळे</span>
+              <span class="lang-en">Shri Sarvesh Sangle</span>
+            </h3>
+            <p style="font-size: 0.88rem; font-weight: 700; color: var(--primary-saffron); text-transform: uppercase; margin: 0;">
+              <span class="lang-mr">सोशल मीडिया प्रतिनिधी</span>
+              <span class="lang-en">Social Media Personnel</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <%- include('partials/footer') %>

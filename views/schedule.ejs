@@ -1,0 +1,67 @@
+<%- include('partials/header') %>
+
+<section class="page-hero-banner">
+  <div class="container">
+    <span class="section-badge" data-i18n="schedule_badge">उत्सव कार्यसूची</span>
+    <h1 data-i18n="schedule_page_title">कार्यक्रमाची रुपरेखा</h1>
+    <p data-i18n="schedule_page_sub">
+      श्री बाल गोपाल गणेशोत्सव मंडळ - मलबार हिलचा राजा (१४ सप्टेंबर ते २५ सप्टेंबर २०२६)
+    </p>
+  </div>
+</section>
+
+<section class="main-content-gradient" style="padding: 4rem 0;">
+  <div class="container" style="max-width: 900px;">
+    
+    <div style="background: #FFFFFF; border: 2px solid var(--royal-gold); border-radius: var(--radius-lg); padding: 2.5rem 2rem; box-shadow: var(--shadow-md); margin-bottom: 2rem;">
+      <div style="text-align: center; margin-bottom: 2rem; border-bottom: 2px solid var(--border-gold); padding-bottom: 1.5rem;">
+        <div style="font-family: var(--font-mr-head); color: var(--temple-maroon); font-size: 1.8rem; font-weight: 800; margin-bottom: 0.2rem;">
+          श्री बाल गोपाल गणेशोत्सव मंडळ
+        </div>
+        <div style="color: var(--primary-saffron); font-weight: 700; font-size: 1.15rem; margin-bottom: 0.5rem;">
+          ।। श्री गजानन प्रसन्न ।।
+        </div>
+        <div style="display: inline-block; background: var(--temple-maroon); color: var(--gold-soft); font-weight: 800; font-size: 1.3rem; padding: 0.5rem 2rem; border-radius: 50px; border: 2px solid var(--royal-gold); margin-top: 0.5rem;">
+          <span class="lang-mr">कार्यक्रमाची रुपरेखा</span><span class="lang-en">Official Festival Schedule</span>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        <% scheduleData.forEach(evt => { %>
+          <div class="card-temple" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding: 1.2rem 1.5rem; background: var(--bg-cream); border: 1px solid var(--border-gold); border-radius: var(--radius-md);">
+            <div style="display: flex; align-items: center; gap: 1rem; min-width: 220px;">
+              <div style="background: var(--temple-maroon); color: var(--gold-soft); padding: 0.5rem 1rem; border-radius: var(--radius-sm); font-weight: 800; font-size: 0.95rem; text-align: center; border: 1px solid var(--royal-gold);">
+                <span class="lang-mr"><%= evt.dateMr %></span>
+                <span class="lang-en"><%= evt.dateEn %></span>
+              </div>
+            </div>
+
+            <div style="flex: 1; min-width: 220px;">
+              <h3 style="font-size: 1.25rem; color: var(--temple-maroon); margin: 0; font-weight: 800;" data-mr="<%= evt.titleMr %>" data-en="<%= evt.titleEn %>">
+                <%= evt.titleMr %>
+              </h3>
+            </div>
+
+            <% if (evt.timeMr) { %>
+              <div style="background: rgba(212, 175, 55, 0.15); border: 1px solid var(--border-gold); color: var(--primary-saffron); font-weight: 700; padding: 0.4rem 0.9rem; border-radius: 20px; font-size: 0.88rem; white-space: nowrap;">
+                <i class="fa-regular fa-clock"></i> <span class="lang-mr"><%= evt.timeMr %></span><span class="lang-en"><%= evt.timeEn %></span>
+              </div>
+            <% } %>
+          </div>
+        <% }); %>
+      </div>
+
+      <div style="margin-top: 2rem; padding: 1.2rem 1.5rem; background: rgba(107, 20, 20, 0.05); border-radius: var(--radius-md); border-left: 4px solid var(--temple-maroon); text-align: center; color: var(--temple-maroon); font-weight: 700; font-size: 1rem;">
+        <span class="lang-mr">(वरील सर्व कार्यक्रमाची नोंद घेऊन सर्व कार्यकर्त्यांनी वेळेवर हजर राहावे.)</span>
+        <span class="lang-en">(All karyakartas and devotees are requested to note the schedule and attend on time.)</span>
+      </div>
+
+      <div style="margin-top: 1.5rem; text-align: center; font-family: var(--font-mr-head); font-size: 1.5rem; color: var(--primary-saffron); font-weight: 800;">
+        मलबार हिलचा राजा
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<%- include('partials/footer') %>
