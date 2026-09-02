@@ -2794,30 +2794,50 @@ section {
   }
 
   .hero-countdown-card {
-    padding: 1.2rem 0.8rem;
-    width: 100%;
+    padding: 0.65rem 0.6rem !important;
+    width: 100% !important;
+    max-width: 380px !important;
+    margin: 0 auto !important;
+    border-radius: var(--radius-md) !important;
+  }
+
+  .countdown-badge-pill {
+    font-size: 0.68rem !important;
+    padding: 2px 8px !important;
+    margin-bottom: 0.35rem !important;
+    letter-spacing: 0.3px !important;
   }
 
   .countdown-card-title {
-    font-size: 1.15rem;
-    margin-bottom: 1rem;
+    font-size: 0.88rem !important;
+    margin-bottom: 0.45rem !important;
+    line-height: 1.25 !important;
   }
 
   .flip-clock-grid {
-    gap: 0.4rem;
+    gap: 0.35rem !important;
+    margin-bottom: 0.4rem !important;
   }
 
   .flip-clock-unit {
-    height: 58px;
-    border-width: 1px;
+    height: 38px !important;
+    border-width: 1px !important;
+    border-radius: 4px !important;
   }
 
   .flip-val {
-    font-size: 1.6rem;
+    font-size: 1.15rem !important;
   }
 
   .timer-label-txt {
-    font-size: 0.75rem;
+    font-size: 0.62rem !important;
+    margin-top: 2px !important;
+  }
+
+  .btn-replay-confetti {
+    margin-top: 0.45rem !important;
+    padding: 0.35rem 0.6rem !important;
+    font-size: 0.74rem !important;
   }
 
   /* Timeline Section */
@@ -2929,12 +2949,39 @@ section {
     grid-template-columns: 1fr !important;
   }
 
+  .hero-countdown-card {
+    padding: 0.55rem 0.5rem !important;
+    max-width: 330px !important;
+  }
+
+  .countdown-badge-pill {
+    font-size: 0.64rem !important;
+    padding: 2px 6px !important;
+    margin-bottom: 0.3rem !important;
+  }
+
+  .countdown-card-title {
+    font-size: 0.82rem !important;
+    margin-bottom: 0.35rem !important;
+  }
+
   .flip-clock-unit {
-    height: 48px;
+    height: 34px !important;
   }
 
   .flip-val {
-    font-size: 1.35rem;
+    font-size: 1.05rem !important;
+  }
+
+  .timer-label-txt {
+    font-size: 0.58rem !important;
+    margin-top: 1px !important;
+  }
+
+  .btn-replay-confetti {
+    margin-top: 0.35rem !important;
+    padding: 0.3rem 0.5rem !important;
+    font-size: 0.7rem !important;
   }
 
   .stat-num-value {
