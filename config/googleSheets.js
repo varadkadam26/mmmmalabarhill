@@ -202,9 +202,37 @@ async function appendContactInquiry(contact) {
   await appendRow(TABS.CONTACT.name, row);
 }
 
+/**
+ * Clear data rows (below header row A1:Z1) from all tabs in Google Sheet
+ */
+async function clearAllSheetsData() {
+  if (!SPREADSHEET_ID) {
+    console.log('⚠️ GOOGLE_SHEET_ID not set in .env — skipping Google Sheets clear.');
+    return false;
+  }
+
+  const client = await getClient();
+  if (!client) return false;
+
+  try {
+    for (const tab of Object.values(TABS)) {
+      await client.spreadsheets.values.clear({
+        spreadsheetId: SPREADSHEET_ID,
+        range: `'${tab.name}'!A2:Z1000`
+      });
+      console.log(`✅ Cleared data rows from Google Sheet tab: "${tab.name}"`);
+    }
+    return true;
+  } catch (err) {
+    console.error('⚠️ Error clearing Google Sheets data rows:', err.message);
+    return false;
+  }
+}
+
 module.exports = {
   ensureTabs,
   appendTshirtBooking,
   appendDonation,
-  appendContactInquiry
+  appendContactInquiry,
+  clearAllSheetsData
 };

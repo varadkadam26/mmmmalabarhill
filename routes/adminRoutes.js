@@ -11,5 +11,6 @@ router.get('/admin/logout', adminController.handleLogout);
 router.get('/admin', adminController.requireAuth, adminController.renderDashboard);
 router.post('/admin/api/verify-pass', adminController.requireAuth, adminController.verifyPassApi);
 router.post('/admin/broadcast-sms', adminController.requireAuth, adminController.sendBroadcastSMS);
+router.post('/admin/api/clear-all-data', adminController.requireAuth, adminController.clearAllDataApi);
 
 module.exports = router;

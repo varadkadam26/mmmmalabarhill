@@ -9,6 +9,10 @@
           <h1 style="font-size: 2.2rem; color: var(--temple-maroon); margin: 0;">ॲडमिन कंट्रोल पॅनेल</h1>
         </div>
         <div style="display: flex; gap: 0.8rem; align-items: center;">
+          <button type="button" id="btnClearTestDataBtn" class="btn btn-outline"
+            style="padding: 0.5rem 1.2rem; font-size: 0.88rem; border-color: #7F1D1D; color: #7F1D1D; font-weight: 700; background: #FFF5F5;">
+            <i class="fa-solid fa-trash-can"></i> सर्व डेटा क्लियर करा (Clear All Data)
+          </button>
           <a href="/admin/logout" class="btn btn-outline" style="padding: 0.5rem 1.2rem; font-size: 0.88rem;">
             <i class="fa-solid fa-right-from-bracket"></i> लॉगआउट (Logout)
           </a>
@@ -257,5 +261,24 @@
 
     </div>
   </section>
+
+  <script>
+    document.getElementById('btnClearTestDataBtn')?.addEventListener('click', async () => {
+      if (confirm('तुम्हाला खरोखर सर्व टेस्ट नोंदी आणि कनेक्टेड एक्सेल डेटा डिलीट करायचा आहे का?\n(Are you sure you want to delete all test entries and clear Google Sheets data?)')) {
+        try {
+          const res = await fetch('/admin/api/clear-all-data', { method: 'POST' });
+          const data = await res.json();
+          if (data.success) {
+            alert(data.message);
+            window.location.reload();
+          } else {
+            alert('Error: ' + data.message);
+          }
+        } catch(e) {
+          alert('डेटा डिलीट करताना एरर आला.');
+        }
+      }
+    });
+  </script>
 
   <%- include('../partials/footer') %>

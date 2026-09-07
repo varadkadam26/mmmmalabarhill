@@ -135,5 +135,18 @@ module.exports = {
       console.error('Broadcast error:', err);
       res.redirect('/admin?broadcast_error=Failed to dispatch broadcast messages.');
     }
+  },
+
+  async clearAllDataApi(req, res) {
+    try {
+      await db.clearAllData();
+      const googleSheets = require('../config/googleSheets');
+      await googleSheets.clearAllSheetsData().catch(err => console.error('Sheet clear error:', err.message));
+      db.addLog('SYSTEM', 'Admin cleared all test entries, donations, tshirt orders, passes & connected Google Sheets data.');
+      return res.json({ success: true, message: 'सर्व टेस्ट नोंदी आणि कनेक्टेड एक्सेल डेटा यशस्वीरित्या डिलीट करण्यात आला आहे.' });
+    } catch (err) {
+      console.error('Clear data error:', err);
+      return res.status(500).json({ success: false, message: 'डेटा डिलीट करताना त्रुटी आली.' });
+    }
   }
 };
