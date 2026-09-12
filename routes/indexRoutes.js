@@ -43,7 +43,6 @@ router.post('/contact/submit', contactController.submitContactForm);
 
 // Official T-Shirt Booking Routes (Renamed from Tshirt Store)
 router.get('/tshirt', tshirtController.renderTshirtPage);
-router.post('/tshirt/create-order', tshirtController.createPaymentOrder);
 router.post('/tshirt/confirm', tshirtController.confirmTshirtOrder);
 router.get('/download-tshirt-receipt/:receiptNo', tshirtController.downloadTshirtReceipt);
 
