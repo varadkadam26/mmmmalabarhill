@@ -122,5 +122,57 @@ module.exports = {
     doc.fillColor('#94A3B8').fontSize(8).font('Helvetica').text('Ganpati Bappa Morya! Shree Bal Gopal Ganeshutsav Mandal', 40, 750, { align: 'center', width: 515 });
 
     doc.end();
+  },
+
+  generateDonationPDFBuffer(donation) {
+    return new Promise((resolve, reject) => {
+      const doc = new PDFDocument({ size: 'A4', margin: 40 });
+      const buffers = [];
+
+      doc.on('data', chunk => buffers.push(chunk));
+      doc.on('end', () => resolve(Buffer.concat(buffers)));
+      doc.on('error', err => reject(err));
+
+      // Header Box
+      doc.rect(40, 40, 515, 100).fill('#4A0404');
+      doc.fillColor('#FFD700').fontSize(18).font('Helvetica-Bold').text('SHREE BAL GOPAL GANESHUTSAV MANDAL', 55, 52, { width: 485 });
+      doc.fillColor('#FFFFFF').fontSize(14).font('Helvetica-Bold').text('MALABAR HILL CHA RAJA (SEC 80G TAX EXEMPT)', 55, 85);
+      doc.fillColor('#FFC107').fontSize(9).font('Helvetica').text('Reg Trust No: F-11518 | 80G Approval: CIT(E)/80G/2024-25/A-1029 | @malabarhill_cha_raja', 55, 106);
+
+      // Main Receipt Body
+      doc.rect(40, 155, 515, 335).lineWidth(1.5).strokeColor('#800020').stroke();
+
+      doc.fillColor('#4A0404').fontSize(13).font('Helvetica-Bold').text('OFFICIAL DONATION ACKNOWLEDGEMENT RECEIPT', 60, 172);
+      doc.moveTo(60, 190).lineTo(535, 190).lineWidth(1).strokeColor('#FCD34D').stroke();
+
+      const drawField = (label, value, x, y, width = 220) => {
+        doc.fillColor('#64748B').fontSize(9).font('Helvetica-Bold').text(label.toUpperCase(), x, y);
+        doc.fillColor('#1E293B').fontSize(11).font('Helvetica-Bold').text(value || 'N/A', x, y + 13, { width });
+      };
+
+      drawField('Receipt Number', donation.receipt_no, 60, 205);
+      drawField('Donation Date', new Date(donation.created_at || Date.now()).toLocaleDateString('en-IN', { dateStyle: 'medium' }), 300, 205);
+
+      drawField('Donor Full Name', donation.donor_name, 60, 250);
+      drawField('Contact Phone', donation.phone, 300, 250);
+
+      drawField('Email Address', donation.email || 'N/A', 60, 295);
+      drawField('Payment UTR / Ref', donation.payment_id || donation.payment_utr || 'N/A', 300, 295);
+
+      drawField('Payment Status', 'APPROVED (SUCCESS)', 60, 340);
+      drawField('Verification', 'MANDAL ADMIN VERIFIED', 300, 340);
+
+      // Amount Highlight Card
+      doc.rect(60, 395, 455, 65).fill('#FFFBEB');
+      doc.rect(60, 395, 455, 65).lineWidth(1.5).strokeColor('#F59E0B').stroke();
+      
+      doc.fillColor('#92400E').fontSize(10).font('Helvetica-Bold').text('CONTRIBUTION AMOUNT RECEIVED', 75, 408);
+      doc.fillColor('#B45309').fontSize(20).font('Helvetica-Bold').text(`₹ ${parseFloat(donation.amount).toLocaleString('en-IN')}/-`, 75, 427);
+
+      // Tax Exemption Note
+      doc.fillColor('#334155').fontSize(9).font('Helvetica').text('Donations are 50% Tax Exempted under Section 80G of IT Act 1961. Thank you for your Seva!', 60, 475, { width: 475 });
+
+      doc.end();
+    });
   }
 };

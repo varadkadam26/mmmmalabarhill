@@ -213,7 +213,7 @@
           <!-- Donations Table -->
           <div class="card-temple" style="margin-bottom: 3rem; padding: 2rem;">
             <h3 style="font-size: 1.4rem; color: var(--temple-maroon); margin-bottom: 1.2rem;">
-              प्राप्त ऑनलाइन देणगी नोंदी (80G Receipts)
+              प्राप्त ऑनलाइन देणगी नोंदी व पडताळणी (80G Approval & Verification)
             </h3>
 
             <div style="overflow-x: auto;">
@@ -222,38 +222,66 @@
                   <tr style="background: var(--temple-maroon); color: var(--gold-soft);">
                     <th style="padding: 10px 14px;">पावती क्र.</th>
                     <th style="padding: 10px 14px;">देणगीदाराचे नाव</th>
-                    <th style="padding: 10px 14px;">मोबाईल</th>
+                    <th style="padding: 10px 14px;">मोबाईल / ईमेल</th>
                     <th style="padding: 10px 14px;">रक्कम (₹)</th>
-                    <th style="padding: 10px 14px;">पॅन कार्ड (80G)</th>
-                    <th style="padding: 10px 14px;">पावती डाऊनलोड</th>
+                    <th style="padding: 10px 14px;">UTR No / Ref</th>
+                    <th style="padding: 10px 14px;">स्थिती (Status)</th>
+                    <th style="padding: 10px 14px;">ॲक्शन (Action)</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <% donations.forEach(d=> { %>
-                    <tr style="border-bottom: 1px solid var(--border-subtle);">
-                      <td style="padding: 10px 14px; font-weight: 700; font-family: monospace;">
-                        <%= d.receipt_no %>
-                      </td>
-                      <td style="padding: 10px 14px;"><strong>
-                          <%= d.donor_name %>
-                        </strong></td>
-                      <td style="padding: 10px 14px;">
-                        <%= d.phone %>
-                      </td>
-                      <td style="padding: 10px 14px; font-weight: 800; color: var(--temple-maroon);">₹ <%=
-                          parseFloat(d.amount).toLocaleString('en-IN') %>
-                      </td>
-                      <td style="padding: 10px 14px;">
-                        <%= d.pan_number || 'N/A' %>
-                      </td>
-                      <td style="padding: 10px 14px;">
-                        <a href="/download-receipt/<%= d.receipt_no %>" class="btn btn-outline"
-                          style="padding: 2px 10px; font-size: 0.8rem;">
-                          PDF 80G
-                        </a>
+                  <% if (!donations || donations.length === 0) { %>
+                    <tr>
+                      <td colspan="7" style="text-align: center; padding: 2rem; color: #888;">
+                        कोणतीही देणगी नोंद उपलब्ध नाही.
                       </td>
                     </tr>
+                  <% } else { %>
+                    <% donations.forEach(d=> { %>
+                      <tr style="border-bottom: 1px solid var(--border-subtle);">
+                        <td style="padding: 10px 14px; font-weight: 700; font-family: monospace;">
+                          <%= d.receipt_no %>
+                        </td>
+                        <td style="padding: 10px 14px;"><strong>
+                            <%= d.donor_name %>
+                          </strong></td>
+                        <td style="padding: 10px 14px;">
+                          <div><%= d.phone %></div>
+                          <small style="color: #666;"><%= d.email || 'ईमेल नाही' %></small>
+                        </td>
+                        <td style="padding: 10px 14px; font-weight: 800; color: var(--temple-maroon);">₹ <%=
+                            parseFloat(d.amount).toLocaleString('en-IN') %>
+                        </td>
+                        <td style="padding: 10px 14px; font-family: monospace; font-weight: bold;">
+                          <%= d.payment_utr || d.payment_id || 'N/A' %>
+                        </td>
+                        <td style="padding: 10px 14px;">
+                          <% if (d.status === 'PENDING_APPROVAL' || d.status === 'PENDING') { %>
+                            <span style="background: #FEF3C7; color: #D97706; padding: 3px 10px; border-radius: 20px; font-weight: bold; font-size: 0.78rem; display: inline-block;">
+                              <i class="fa-solid fa-clock"></i> प्रलंबित (Pending Approval)
+                            </span>
+                          <% } else { %>
+                            <span style="background: #D1FAE5; color: #059669; padding: 3px 10px; border-radius: 20px; font-weight: bold; font-size: 0.78rem; display: inline-block;">
+                              <i class="fa-solid fa-circle-check"></i> मंजूर (Approved)
+                            </span>
+                          <% } %>
+                        </td>
+                        <td style="padding: 10px 14px;">
+                          <% if (d.status === 'PENDING_APPROVAL' || d.status === 'PENDING') { %>
+                            <button type="button" onclick="approveDonation('<%= d.receipt_no %>', this)" class="btn btn-primary"
+                              style="padding: 4px 10px; font-size: 0.78rem; background: #16A34A !important; border: none; font-weight: 700; white-space: nowrap;">
+                              <i class="fa-solid fa-circle-check"></i> मंजूर करा व पावती पाठवा
+                            </button>
+                          <% } else { %>
+                            <a href="/download-receipt/<%= d.receipt_no %>" class="btn btn-outline"
+                              style="padding: 3px 10px; font-size: 0.78rem; white-space: nowrap;">
+                              <i class="fa-solid fa-file-pdf"></i> PDF 80G
+                            </a>
+                          <% } %>
+                        </td>
+                      </tr>
                     <% }); %>
+                  <% } %>
                 </tbody>
               </table>
             </div>
@@ -263,6 +291,28 @@
   </section>
 
   <script>
+    async function approveDonation(receiptNo, btn) {
+      if (!confirm(`तुम्हाला पावती क्र. ${receiptNo} खरोखर मंजूर करायची आहे का?\n(मंजूर केल्यानंतर ईमेलद्वारे पावती PDF पाठवली जाईल.)`)) return;
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> मंजूर होत आहे...';
+      try {
+        const res = await fetch(`/admin/api/approve-donation/${receiptNo}`, { method: 'POST' });
+        const data = await res.json();
+        if (data.success) {
+          alert(data.message);
+          window.location.reload();
+        } else {
+          alert('Error: ' + data.message);
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> मंजूर करा व पावती पाठवा';
+        }
+      } catch(e) {
+        alert('सर्वर त्रुटी आली. कृपया पुन्हा प्रयत्न करा.');
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> मंजूर करा व पावती पाठवा';
+      }
+    }
+
     document.getElementById('btnClearTestDataBtn')?.addEventListener('click', async () => {
       if (confirm('तुम्हाला खरोखर सर्व टेस्ट नोंदी आणि कनेक्टेड एक्सेल डेटा डिलीट करायचा आहे का?\n(Are you sure you want to delete all test entries and clear Google Sheets data?)')) {
         try {

@@ -274,6 +274,21 @@ module.exports = {
     }
   },
 
+  async updateDonationStatus(receiptNo, status) {
+    const d = mockStore.donations.find(item => item.receipt_no.toUpperCase() === receiptNo.toUpperCase());
+    if (d) {
+      d.status = status;
+    }
+    if (!useMock && dbPool) {
+      try {
+        await dbPool.query('UPDATE donations SET status = ? WHERE UPPER(receipt_no) = UPPER(?)', [status, receiptNo]);
+      } catch (err) {
+        console.error('MySQL update donation status error:', err.message);
+      }
+    }
+    return d;
+  },
+
 
   async getTshirtOrders() {
     if (useMock) return mockStore.tshirt_orders || [];

@@ -1,7 +1,7 @@
 const db = require('../config/db');
-const razorpay = require('../config/razorpay');
 const twilio = require('../config/twilio');
 const pdfController = require('./pdfController');
+const mailer = require('../config/mailer');
 const googleSheets = require('../config/googleSheets');
 
 module.exports = {
@@ -9,66 +9,47 @@ module.exports = {
   renderDonationPage(req, res) {
     res.render('donate', {
       title: 'Online Donation Portal (80G Tax Exempt) | Malabar Hill Cha Raja',
-      metaDescription: 'Support Shree Bal Gopal Ganeshutsav Mandal\'s social service and festival initiatives. 80G tax-exempt online donations via secure Razorpay payment gateway with instant digital PDF receipts.',
-      activeTab: 'donate',
-      razorpayKeyId: razorpay.getKeyId()
+      metaDescription: 'Support Shree Bal Gopal Ganeshutsav Mandal\'s social service and festival initiatives. 80G tax-exempt online donations with direct bank/UPI verification and official PDF receipts.',
+      activeTab: 'donate'
     });
   },
 
-  // Create Razorpay Payment Order
-  async createPaymentOrder(req, res) {
+  // Submit Donation (Pending Admin Approval)
+  async submitDonation(req, res) {
     try {
-      const { amount } = req.body;
-      if (!amount || parseFloat(amount) <= 0) {
-        return res.status(400).json({ success: false, message: 'Invalid donation amount.' });
+      const { donor_name, phone, email, amount, payment_utr } = req.body;
+
+      if (!donor_name || !phone || !amount || !payment_utr) {
+        return res.status(400).json({
+          success: false,
+          message: 'कृपया नाव, मोबाईल नंबर, देणगी रक्कम आणि पेमेंट UTR नंबर प्रविष्ट करा.'
+        });
       }
 
-      const tempReceiptNo = `MCC-REC-2026-${Math.floor(100 + Math.random() * 900)}`;
-      const orderResponse = await razorpay.createOrder(amount, tempReceiptNo);
-
-      res.json({
-        success: true,
-        receipt_no: tempReceiptNo,
-        order: orderResponse
-      });
-    } catch (err) {
-      console.error('Create payment order error:', err);
-      res.status(500).json({ success: false, message: 'Failed to initiate donation payment.' });
-    }
-  },
-
-  // Confirm Donation & Save Record
-  async confirmDonation(req, res) {
-    try {
-      const {
-        receipt_no, donor_name, phone, email, amount,
-        payment_id, order_id, signature, pan_number
-      } = req.body;
-
-      if (!donor_name || !phone || !amount) {
-        return res.status(400).json({ success: false, message: 'Missing required donation details.' });
-      }
-
-      const isValidSignature = razorpay.verifyPaymentSignature(order_id, payment_id, signature);
-      if (!isValidSignature) {
-        return res.status(400).json({ success: false, message: 'Payment verification failed.' });
+      const numAmount = parseFloat(amount);
+      if (isNaN(numAmount) || numAmount <= 0) {
+        return res.status(400).json({
+          success: false,
+          message: 'कृपया वैध देणगी रक्कम प्रविष्ट करा.'
+        });
       }
 
       const donationData = {
-        receipt_no: receipt_no || `MCC-REC-2026-${Math.floor(100 + Math.random() * 900)}`,
+        receipt_no: `MCC-REC-2026-${Math.floor(100 + Math.random() * 900)}`,
         donor_name: donor_name.trim(),
         phone: phone.trim(),
         email: (email || '').trim(),
-        amount: parseFloat(amount),
-        category: 'General Mandal Donation & Seva',
-        payment_id: payment_id || `pay_sim_${Date.now()}`,
-        order_id: order_id || `order_sim_${Date.now()}`,
-        pan_number: (pan_number || '').toUpperCase().trim(),
-        status: 'SUCCESS'
+        amount: numAmount,
+        category: 'General Mandal Seva',
+        payment_id: payment_utr.trim(),
+        order_id: `utr_${Date.now()}`,
+        payment_utr: payment_utr.trim(),
+        pan_number: 'N/A',
+        status: 'PENDING_APPROVAL'
       };
 
       const createdDonation = await db.createDonation(donationData);
-      db.addLog('DONATION', `New Donation received: ₹${createdDonation.amount} from ${createdDonation.donor_name}`);
+      db.addLog('DONATION_SUBMIT', `Pending Donation submitted: ₹${createdDonation.amount} from ${createdDonation.donor_name} (UTR: ${payment_utr})`);
 
       // Sync to Google Sheets
       try {
@@ -77,17 +58,60 @@ module.exports = {
         console.error('Google Sheets donation sync error:', err.message);
       }
 
-      // Dispatch SMS notification via Twilio
-      twilio.sendDonationReceiptSMS(createdDonation).catch(err => console.error('Donation SMS error:', err));
-
       res.json({
         success: true,
         receipt_no: createdDonation.receipt_no,
-        message: 'Donation successfully processed. Thank you for your Seva!'
+        message: 'तुमची देणगी नोंदणी यशस्वी झाली आहे! मंडळाच्या पडताळणीनंतर (Admin Approval) अधिकृत ८०जी PDF पावती तुमच्या ईमेलवर पाठवली जाईल.'
       });
     } catch (err) {
-      console.error('Confirm donation error:', err);
-      res.status(500).json({ success: false, message: 'Error recording donation payment.' });
+      console.error('Submit donation error:', err);
+      res.status(500).json({ success: false, message: 'देणगी नोंदवताना त्रुटी आली. कृपया पुन्हा प्रयत्न करा.' });
+    }
+  },
+
+  // Approve Donation (Admin Action) & Send PDF Email
+  async approveDonation(req, res) {
+    try {
+      const { receiptNo } = req.params;
+      const donation = await db.getDonationByReceipt(receiptNo);
+
+      if (!donation) {
+        return res.status(404).json({ success: false, message: 'Donation record not found.' });
+      }
+
+      donation.status = 'SUCCESS';
+      await db.updateDonationStatus(receiptNo, 'SUCCESS');
+
+      db.addLog('DONATION_APPROVE', `Donation ${receiptNo} approved by Admin for ${donation.donor_name}.`);
+
+      // Generate PDF buffer
+      let pdfBuffer = null;
+      try {
+        pdfBuffer = await pdfController.generateDonationPDFBuffer(donation);
+      } catch (err) {
+        console.error('Failed to generate PDF buffer:', err.message);
+      }
+
+      // Send email if donor email exists and pdfBuffer generated
+      let emailSent = false;
+      if (donation.email && pdfBuffer) {
+        emailSent = await mailer.sendDonationApprovalEmail(donation, pdfBuffer);
+      }
+
+      // SMS notification via Twilio
+      twilio.sendDonationReceiptSMS(donation).catch(err => console.error('SMS error:', err.message));
+
+      res.json({
+        success: true,
+        receipt_no: donation.receipt_no,
+        email_sent: emailSent,
+        message: emailSent
+          ? 'देणगी पावती यशस्वीरित्या मंजूर करण्यात आली आहे व ईमेलवर पाठवली आहे.'
+          : 'देणगी मंजूर करण्यात आली आहे.'
+      });
+    } catch (err) {
+      console.error('Approve donation error:', err);
+      res.status(500).json({ success: false, message: 'देणगी मंजूर करताना त्रुटी आली.' });
     }
   },
 
