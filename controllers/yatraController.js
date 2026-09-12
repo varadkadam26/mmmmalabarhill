@@ -142,7 +142,7 @@ const socialWorkData = [
 // Committee Members Data - 2025-26
 const committeeData = [
   { number: 1, nameMr: 'श्री. केतन जमनादास पटेल', nameEn: 'Shri Ketan Jamnadas Patel', designationMr: 'कार्याध्यक्ष', designationEn: 'Working President', image: '/images/committee/ketan_patel.png' },
-  { number: 2, nameMr: 'श्री. परेश रमेश परब', nameEn: 'Shri Paresh Ramesh Parab', designationMr: 'अध्यक्ष', designationEn: 'President' },
+  { number: 2, nameMr: 'श्री. परेश रमेश परब', nameEn: 'Shri Paresh Ramesh Parab', designationMr: 'अध्यक्ष', designationEn: 'President', image: '/images/committee/paresh_parab.png' },
   { number: 3, nameMr: 'श्री. आदित्य पवार', nameEn: 'Shri Aditya Pawar', designationMr: 'उपाध्यक्ष', designationEn: 'Vice President', image: '/images/committee/aditya_pawar.png' },
   { number: 4, nameMr: 'श्री. अभिषेक उगले', nameEn: 'Shri Abhishek Ugale', designationMr: 'उपाध्यक्ष', designationEn: 'Vice President', image: '/images/committee/abhishek_ugale.png' },
   { number: 5, nameMr: 'श्री. चंद्रकांत सांगळे', nameEn: 'Shri Chandrakant Sangale', designationMr: 'उपाध्यक्ष', designationEn: 'Vice President', image: '/images/committee/chandrakant_sangle.png' },
