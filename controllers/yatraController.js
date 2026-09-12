@@ -150,7 +150,7 @@ const committeeData = [
   { number: 9, nameMr: 'श्री. महेश यमकर', nameEn: 'Shri Mahesh Yamkar', designationMr: 'सहसचिव', designationEn: 'Joint Secretary', image: '/images/committee/mahesh_yamkar.png' },
   { number: 10, nameMr: 'श्री. भुपेंद्र पवार', nameEn: 'Shri Bhupendra Pawar', designationMr: 'सहसचिव', designationEn: 'Joint Secretary', image: '/images/committee/bhupendra_pawar.png' },
   { number: 11, nameMr: 'श्री. सुनिल घुगे', nameEn: 'Shri Sunil Ghuge', designationMr: 'सहसचिव', designationEn: 'Joint Secretary', image: '/images/committee/sunil_ghuge.png' },
-  { number: 12, nameMr: 'श्री. सर्वेश सांगळे', nameEn: 'Shri Sarvesh Sangale', designationMr: 'सहसचिव', designationEn: 'Joint Secretary', image: '/images/committee/sarvesh_sangle.jpg' },
+  { number: 12, nameMr: 'श्री. भाविक पटेल', nameEn: 'Shri Bhavik Patel', designationMr: 'सोशल मीडिया प्रमुख', designationEn: 'Social Media Head', image: '/images/committee/bhavik_patel.jpg' },
   { number: 13, nameMr: 'श्री. शिवकुमार पांडे', nameEn: 'Shri Shivkumar Pande', designationMr: 'खजिनदार', designationEn: 'Treasurer', image: '/images/committee/shivkumar_pande.png' },
   { number: 14, nameMr: 'श्री. निखिल परब', nameEn: 'Shri Nikhil Parab', designationMr: 'खजिनदार', designationEn: 'Treasurer', image: '/images/committee/nikhil_parab_real.png' },
   { number: 15, nameMr: 'श्री. हर्ष पटेल', nameEn: 'Shri Harsh Patel', designationMr: 'खजिनदार', designationEn: 'Treasurer', image: '/images/committee/harsh_patel.png' },
