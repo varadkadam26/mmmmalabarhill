@@ -51,14 +51,23 @@
             <input type="text" id="buyerName" required placeholder="नाव टाका" data-i18n="ph_name" style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-gold); font-size: 0.95rem;">
           </div>
 
-          <div style="margin-bottom: 1.2rem;">
-            <label style="display: block; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text-main);">
-              <span data-i18n="tshirt_phone_label">मोबाईल नंबर (WhatsApp) *</span>
-            </label>
-            <input type="tel" id="buyerPhone" required placeholder="१० अंकी मोबाईल नंबर" data-i18n="ph_phone" style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-gold); font-size: 0.95rem;">
+          <div class="form-grid-2" style="margin-bottom: 1.2rem;">
+            <div>
+              <label style="display: block; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text-main);">
+                <span data-i18n="tshirt_phone_label">मोबाईल नंबर (WhatsApp) *</span>
+              </label>
+              <input type="tel" id="buyerPhone" required placeholder="१० अंकी मोबाईल नंबर" data-i18n="ph_phone" style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-gold); font-size: 0.95rem;">
+            </div>
+
+            <div>
+              <label style="display: block; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text-main);">
+                <span>ईमेल आयडी (माहितीसाठी)</span>
+              </label>
+              <input type="email" id="buyerEmail" placeholder="ईमेल आयडी प्रविष्ट करा" style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-gold); font-size: 0.95rem;">
+            </div>
           </div>
 
-          <div class="form-grid-2">
+          <div class="form-grid-2" style="margin-bottom: 1.2rem;">
             <div>
               <label style="display: block; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text-main);">
                 <span data-i18n="tshirt_size_label">साईझ निवडा (Size) *</span>
@@ -96,7 +105,7 @@
             </div>
           </div>
 
-          <div class="form-grid-2">
+          <div class="form-grid-2" style="margin-bottom: 1.2rem;">
             <div>
               <label style="display: block; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text-main);">
                 <span data-i18n="tshirt_qty_label">संख्या (Qty) *</span>
@@ -117,35 +126,161 @@
             </div>
           </div>
 
-          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.9rem; font-size: 1.05rem;" id="btnBookSubmit">
-            <span data-i18n="tshirt_submit">टी-शर्ट बुकिंग करा व पावती मिळवा</span> <i class="bi bi-bag-check-fill"></i>
+          <!-- Price Summary Card -->
+          <div style="background: var(--bg-cream); border: 1px dashed var(--border-gold); padding: 1rem 1.2rem; border-radius: var(--radius-sm); margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-weight: 700; color: var(--text-main);">एकूण देय रक्कम (Total Payable):</span>
+            <span id="tshirtTotalDisplay" style="font-size: 1.4rem; font-weight: 800; color: var(--temple-maroon);">₹ ३५०/-</span>
+          </div>
+
+          <!-- Payment UTR Number (Compulsory) -->
+          <div style="margin-bottom: 2rem;">
+            <label style="display: block; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text-main);">
+              पेमेंट UTR / व्यवहार क्रमांक (Payment UTR / Txn ID) *
+            </label>
+            <input type="text" id="paymentUtrNo" required placeholder="१२ अंकी UTR किंवा Txn ID प्रविष्ट करा (उदा. 423456789012)"
+              style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-gold); font-size: 0.95rem; font-family: monospace; font-weight: bold;">
+            <small style="color: #666; font-size: 0.8rem; display: block; margin-top: 4px;">
+              <i class="bi bi-info-circle"></i> खालील QR किंवा बँक खात्यावर पेमेंट केल्यानंतर मिळालेला १२ अंकी UTR/Txn ID येथे प्रविष्ट करा.
+            </small>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.95rem; font-size: 1.05rem; font-weight: 800;" id="btnBookSubmit">
+            <span data-i18n="tshirt_submit">टी-शर्ट बुकिंग नोंदवा</span> <i class="bi bi-shield-check"></i>
           </button>
         </form>
+      </div>
+    </div>
+
+    <!-- UPI Scan & Pay Card Section -->
+    <div class="card-temple" style="padding: 2.5rem; margin-top: 3rem; text-align: center; background: #FFFFFF; border: 2px solid var(--royal-gold); box-shadow: var(--shadow-md);">
+      <div style="background: rgba(212, 175, 55, 0.1); border-radius: var(--radius-md); padding: 1rem 1.5rem; margin-bottom: 1.5rem; display: inline-block;">
+        <span style="font-size: 0.85rem; font-weight: 800; text-transform: uppercase; color: var(--primary-saffron); letter-spacing: 1px;">
+          SVC CO-OPERATIVE BANK LTD.
+        </span>
+        <h3 style="font-size: 1.4rem; color: var(--temple-maroon); margin: 0.2rem 0 0; font-family: var(--font-en-head);">
+          SCAN & PAY VIA UPI
+        </h3>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1.5rem;">
+        <div style="padding: 12px; background: #FFFFFF; border: 2px solid var(--royal-gold); border-radius: 12px; box-shadow: var(--shadow-sm); display: inline-block;">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=upi%3A%2F%2Fpay%3Fpa%3DSVCMERC00301799%40svcbank%26pn%3DShree%2520Bal%2520Gospel%2520Ganeshutsav%2520Mandal%26cu%3DINR" 
+            alt="SVC Bank UPI QR Code for Malabar Hill Cha Raja" 
+            style="width: 200px; height: 200px; display: block;">
+        </div>
+        
+        <div style="background: var(--bg-cream); border: 1.5px solid var(--border-gold); padding: 0.8rem 1.4rem; border-radius: 50px; display: inline-flex; align-items: center; gap: 10px; max-width: 100%;">
+          <i class="fa-solid fa-qrcode" style="color: var(--primary-saffron); font-size: 1.2rem;"></i>
+          <span style="font-family: monospace; font-size: 1.05rem; font-weight: 800; color: var(--temple-maroon); word-break: break-all;" id="textUpiId">
+            SVCMERC00301799@svcbank
+          </span>
+          <button type="button" onclick="navigator.clipboard.writeText('SVCMERC00301799@svcbank'); alert('UPI ID Copied: SVCMERC00301799@svcbank');" 
+            style="background: var(--temple-maroon); color: #FFF; border: none; padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; cursor: pointer; white-space: nowrap;">
+            <i class="fa-regular fa-copy"></i> Copy
+          </button>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: center; align-items: center; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">
+        <span><i class="fa-solid fa-check-circle" style="color: #16A34A;"></i> Google Pay</span>
+        <span><i class="fa-solid fa-check-circle" style="color: #16A34A;"></i> PhonePe</span>
+        <span><i class="fa-solid fa-check-circle" style="color: #16A34A;"></i> Paytm</span>
+        <span><i class="fa-solid fa-check-circle" style="color: #16A34A;"></i> BHIM UPI</span>
+      </div>
+    </div>
+
+    <!-- Bank Details Section -->
+    <div class="card-temple" style="padding: 3rem; margin-top: 2.5rem;">
+      <h2 style="font-size: 1.8rem; color: var(--temple-maroon); margin-bottom: 1.5rem; text-align: center;">
+        <span>बँक खाते तपशील / Bank Account Details</span>
+      </h2>
+      
+      <div style="background: var(--bg-cream); border: 1px solid var(--border-gold); padding: 2rem; border-radius: var(--radius-sm); font-size: 1.1rem; line-height: 1.8; color: var(--text-dark);">
+        <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+          <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; border-bottom: 1px dashed var(--border-gold); padding-bottom: 0.5rem;">
+            <strong style="color: var(--temple-maroon);">बँकेचे नाव:</strong>
+            <span>SVC Co-Operative Bank Ltd.</span>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; border-bottom: 1px dashed var(--border-gold); padding-bottom: 0.5rem;">
+            <strong style="color: var(--temple-maroon);">खात्याचे नाव:</strong>
+            <span>Shree Bal Gopal Ganeshutsav Mandal (Bal Gopal Mandal)</span>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; border-bottom: 1px dashed var(--border-gold); padding-bottom: 0.5rem;">
+            <strong style="color: var(--temple-maroon);">UPI ID:</strong>
+            <span style="font-family: monospace; font-size: 1.15rem; font-weight: bold; color: var(--primary-saffron);">SVCMERC00301799@svcbank</span>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; border-bottom: 1px dashed var(--border-gold); padding-bottom: 0.5rem;">
+            <strong style="color: var(--temple-maroon);">खाते क्रमांक:</strong>
+            <span style="font-family: monospace; font-size: 1.2rem; font-weight: bold;">100903130041974</span>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; border-bottom: 1px dashed var(--border-gold); padding-bottom: 0.5rem;">
+            <strong style="color: var(--temple-maroon);">आयएफएससी कोड:</strong>
+            <span style="font-family: monospace; font-size: 1.2rem; font-weight: bold;">SVCB0000009</span>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; border-bottom: 1px dashed var(--border-gold); padding-bottom: 0.5rem;">
+            <strong style="color: var(--temple-maroon);">शाखा:</strong>
+            <span>Sleater Road</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- Confirmation Success Modal -->
+<div id="tshirtSuccessModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 99999; align-items: center; justify-content: center; padding: 1rem;">
+  <div style="background: #FFFFFF; border: 3px solid var(--royal-gold); border-radius: var(--radius-lg); max-width: 500px; width: 100%; padding: 2.5rem; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.4);">
+    <div style="width: 70px; height: 70px; background: #D1FAE5; color: #059669; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; margin: 0 auto 1.2rem;">
+      <i class="fa-solid fa-circle-check"></i>
+    </div>
+    <h3 style="color: var(--temple-maroon); font-size: 1.5rem; margin-bottom: 0.6rem;">तुमची टी-शर्ट बुकिंग नोंदणी यशस्वी झाली आहे!</h3>
+    <p style="color: #4B5563; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
+      मंडळाच्या बँक पडताळणीनंतर (Admin Approval) तुमची अधिकृत <strong>टी-शर्ट पावती</strong> मंजूर केली जाईल.
+    </p>
+    <div style="background: var(--bg-cream); border: 1px dashed var(--border-gold); padding: 1rem; border-radius: 8px; margin-bottom: 1.8rem; font-size: 0.9rem; text-align: left;">
+      <div><strong>पावती क्रमांक:</strong> <span id="modalTshirtReceiptNo" style="font-family: monospace; font-weight: bold; color: var(--temple-maroon);"></span></div>
+      <div><strong>पडताळणी स्थिती:</strong> <span style="color: #D97706; font-weight: bold;">पडताळणी प्रलंबित (Pending Admin Approval)</span></div>
+    </div>
+    <button type="button" class="btn btn-primary" onclick="window.location.reload();" style="width: 100%; padding: 0.85rem; font-weight: bold;">
+      ठीक आहे (OK)
+    </button>
+  </div>
+</div>
+
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('tshirtForm').addEventListener('submit', async (e) => {
+    const tshirtQtyInput = document.getElementById('tshirtQty');
+    const tshirtTotalDisplay = document.getElementById('tshirtTotalDisplay');
+
+    if (tshirtQtyInput && tshirtTotalDisplay) {
+      tshirtQtyInput.addEventListener('input', () => {
+        const qty = parseInt(tshirtQtyInput.value, 10) || 1;
+        const total = qty * 350;
+        tshirtTotalDisplay.textContent = `₹ ${total.toLocaleString('en-IN')}/-`;
+      });
+    }
+
+    const tshirtForm = document.getElementById('tshirtForm');
+    if (!tshirtForm) return;
+
+    tshirtForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = document.getElementById('btnBookSubmit');
       const originalHTML = btn.innerHTML;
       btn.disabled = true;
-      btn.innerHTML = '<span>बुकिंग प्रक्रिया सुरू आहे...</span>';
+      btn.innerHTML = '<span>बुकिंग नोंदणी होत आहे...</span>';
 
       const qty = parseInt(document.getElementById('tshirtQty').value, 10) || 1;
-      const deliveryType = 'Mandap Counter Pickup';
-      const addressVal = 'Mandap Counter Pickup';
       const buyerName = document.getElementById('buyerName').value.trim();
       const buyerPhone = document.getElementById('buyerPhone').value.trim();
+      const buyerEmail = document.getElementById('buyerEmail') ? document.getElementById('buyerEmail').value.trim() : '';
       const tshirtSize = document.getElementById('tshirtSize').value;
       const tshirtColor = document.getElementById('tshirtColor').value;
+      const paymentUtrNo = document.getElementById('paymentUtrNo').value.trim();
       const totalAmount = qty * 350;
 
-      if (!buyerName || !buyerPhone) {
-        alert('कृपया नाव आणि मोबाईल नंबर प्रविष्ट करा. / Please enter name and mobile number.');
+      if (!buyerName || !buyerPhone || !paymentUtrNo) {
+        alert('कृपया नाव, मोबाईल नंबर आणि पेमेंट UTR / Txn ID प्रविष्ट करा.');
         btn.disabled = false;
         btn.innerHTML = originalHTML;
         return;
@@ -153,7 +288,7 @@
 
       const cleanPhone = buyerPhone.replace(/\D/g, '');
       if (cleanPhone.length < 10) {
-        alert('कृपया १० अंकी वैध मोबाईल नंबर टाका. / Please enter a valid 10-digit mobile number.');
+        alert('कृपया १० अंकी वैध मोबाईल नंबर टाका.');
         btn.disabled = false;
         btn.innerHTML = originalHTML;
         return;
@@ -166,18 +301,20 @@
           body: JSON.stringify({
             buyer_name: buyerName,
             phone: buyerPhone,
+            email: buyerEmail,
             size: tshirtSize,
             color: tshirtColor,
             quantity: qty,
             total_amount: totalAmount,
-            address: addressVal,
-            payment_id: `pay_tshirt_${Date.now()}`
+            address: 'Mandap Counter Pickup',
+            payment_id: paymentUtrNo
           })
         });
         const confirmData = await confirmRes.json();
         if (confirmData.success) {
-          alert('बुकिंग यशस्वी झाले! तुमची पावती डाउनलोड करा.');
-          window.location.href = `/download-tshirt-receipt/${confirmData.receipt_no}`;
+          document.getElementById('modalTshirtReceiptNo').textContent = confirmData.receipt_no;
+          const modal = document.getElementById('tshirtSuccessModal');
+          modal.style.display = 'flex';
         } else {
           alert(confirmData.message || 'Error confirming tshirt booking.');
           btn.disabled = false;

@@ -289,6 +289,22 @@ module.exports = {
     return d;
   },
 
+  async updateTshirtOrderStatus(receiptNo, status) {
+    const item = (mockStore.tshirt_orders || []).find(o => o.receipt_no.toUpperCase() === receiptNo.toUpperCase());
+    if (item) {
+      item.status = status;
+    }
+    if (!useMock && dbPool) {
+      try {
+        await dbPool.query('UPDATE tshirt_orders SET status = ? WHERE UPPER(receipt_no) = UPPER(?)', [status, receiptNo]);
+      } catch (err) {
+        console.error('MySQL update tshirt order status error:', err.message);
+      }
+    }
+    return item;
+  },
+
+
 
   async getTshirtOrders() {
     if (useMock) return mockStore.tshirt_orders || [];
