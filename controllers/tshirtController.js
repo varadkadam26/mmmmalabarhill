@@ -1,5 +1,4 @@
 const db = require('../config/db');
-const twilio = require('../config/twilio');
 const pdfController = require('./pdfController');
 const googleSheets = require('../config/googleSheets');
 
@@ -51,11 +50,6 @@ module.exports = {
         await googleSheets.appendTshirtBooking(createdOrder);
       } catch (err) {
         console.error('Google Sheets tshirt sync error:', err.message);
-      }
-
-      // Dispatch SMS notification via Twilio safely
-      if (twilio && typeof twilio.sendTshirtReceiptSMS === 'function') {
-        twilio.sendTshirtReceiptSMS(createdOrder).catch(err => console.error('T-Shirt SMS error:', err.message));
       }
 
       res.json({

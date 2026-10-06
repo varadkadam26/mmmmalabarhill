@@ -34,7 +34,6 @@
     "nodemailer": "^9.0.6",
     "pdfkit": "^0.15.0",
     "razorpay": "^2.9.4",
-    "terser": "^5.51.2",
-    "twilio": "^5.1.0"
+    "terser": "^5.51.2"
   }
 }

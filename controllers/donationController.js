@@ -1,5 +1,4 @@
 const db = require('../config/db');
-const twilio = require('../config/twilio');
 const pdfController = require('./pdfController');
 const mailer = require('../config/mailer');
 const googleSheets = require('../config/googleSheets');
@@ -98,8 +97,6 @@ module.exports = {
         emailSent = await mailer.sendDonationApprovalEmail(donation, pdfBuffer);
       }
 
-      // SMS notification via Twilio
-      twilio.sendDonationReceiptSMS(donation).catch(err => console.error('SMS error:', err.message));
 
       res.json({
         success: true,

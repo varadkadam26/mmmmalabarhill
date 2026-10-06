@@ -1,5 +1,4 @@
 const db = require('../config/db');
-const twilio = require('../config/twilio');
 
 const ADMIN_USER = process.env.ADMIN_USERNAME || 'admin';
 const ADMIN_PASS = process.env.ADMIN_PASSWORD || 'admin123';
@@ -125,7 +124,7 @@ module.exports = {
       let sentCount = 0;
       for (const pass of passes) {
         if (pass.phone) {
-          await twilio.sendSMS(pass.phone, `[SAI LEELA PALKHI ANNOUNCEMENT] ${message.trim()}`);
+          // Broadcast SMS disabled
           sentCount++;
         }
       }
