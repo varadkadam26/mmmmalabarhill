@@ -131,10 +131,11 @@
     document.getElementById('tshirtForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = document.getElementById('btnBookSubmit');
+      const originalHTML = btn.innerHTML;
       btn.disabled = true;
-      btn.innerText = 'बुकिंग प्रक्रिया सुरू आहे...';
+      btn.innerHTML = '<span>बुकिंग प्रक्रिया सुरू आहे...</span>';
 
-      const qty = parseInt(document.getElementById('tshirtQty').value, 10);
+      const qty = parseInt(document.getElementById('tshirtQty').value, 10) || 1;
       const deliveryType = 'Mandap Counter Pickup';
       const addressVal = 'Mandap Counter Pickup';
       const buyerName = document.getElementById('buyerName').value.trim();
@@ -142,6 +143,21 @@
       const tshirtSize = document.getElementById('tshirtSize').value;
       const tshirtColor = document.getElementById('tshirtColor').value;
       const totalAmount = qty * 350;
+
+      if (!buyerName || !buyerPhone) {
+        alert('कृपया नाव आणि मोबाईल नंबर प्रविष्ट करा. / Please enter name and mobile number.');
+        btn.disabled = false;
+        btn.innerHTML = originalHTML;
+        return;
+      }
+
+      const cleanPhone = buyerPhone.replace(/\D/g, '');
+      if (cleanPhone.length < 10) {
+        alert('कृपया १० अंकी वैध मोबाईल नंबर टाका. / Please enter a valid 10-digit mobile number.');
+        btn.disabled = false;
+        btn.innerHTML = originalHTML;
+        return;
+      }
 
       try {
         const confirmRes = await fetch('/tshirt/confirm', {
@@ -165,13 +181,13 @@
         } else {
           alert(confirmData.message || 'Error confirming tshirt booking.');
           btn.disabled = false;
-          btn.innerText = 'टी-शर्ट बुकिंग करा व पावती मिळवा';
+          btn.innerHTML = originalHTML;
         }
       } catch(err) {
         console.error('T-Shirt booking error:', err);
         alert('Error connecting to server.');
         btn.disabled = false;
-        btn.innerText = 'टी-शर्ट बुकिंग करा व पावती मिळवा';
+        btn.innerHTML = originalHTML;
       }
     });
   });

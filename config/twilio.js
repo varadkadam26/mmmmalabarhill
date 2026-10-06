@@ -50,5 +50,10 @@ module.exports = {
   async sendDonationReceiptSMS(donationData) {
     const msg = `Om Sai Ram! Thank you ${donationData.donor_name} for your generous donation of Rs. ${donationData.amount} towards ${donationData.category}. Receipt No: ${donationData.receipt_no}. - Sai Leela Seva Trust`;
     return this.sendSMS(donationData.phone, msg);
+  },
+
+  async sendTshirtReceiptSMS(tshirtData) {
+    const msg = `Om Sai Ram! Thank you ${tshirtData.buyer_name} for your T-Shirt booking of Rs. ${tshirtData.total_amount}. Receipt No: ${tshirtData.receipt_no}. Collect from Mandap counter. - Shree Bal Gopal Ganeshutsav Mandal`;
+    return this.sendSMS(tshirtData.phone, msg);
   }
 };

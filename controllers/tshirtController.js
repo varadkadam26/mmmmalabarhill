@@ -20,7 +20,10 @@ module.exports = {
         buyer_name, phone, email, size, color, quantity, total_amount, address, payment_id
       } = req.body;
 
-      if (!buyer_name || !phone || !size || !color || !quantity || !total_amount) {
+      const parsedQty = parseInt(quantity, 10) || 1;
+      const parsedAmount = parseFloat(total_amount) || (parsedQty * 350);
+
+      if (!buyer_name || !phone || !size || !color) {
         return res.status(400).json({ success: false, message: 'कृपया नाव, मोबाईल नंबर, साईझ आणि संख्या प्रविष्ट करा.' });
       }
 
@@ -33,8 +36,8 @@ module.exports = {
         email: (email || '').trim(),
         size,
         color,
-        quantity: parseInt(quantity, 10),
-        total_amount: parseFloat(total_amount),
+        quantity: parsedQty,
+        total_amount: parsedAmount,
         address: (address || 'Mandap Counter Pickup').trim(),
         payment_id: payment_id || `pay_tshirt_${Date.now()}`,
         status: 'SUCCESS'
@@ -50,8 +53,10 @@ module.exports = {
         console.error('Google Sheets tshirt sync error:', err.message);
       }
 
-      // Dispatch SMS notification via Twilio
-      twilio.sendTshirtReceiptSMS(createdOrder).catch(err => console.error('T-Shirt SMS error:', err));
+      // Dispatch SMS notification via Twilio safely
+      if (twilio && typeof twilio.sendTshirtReceiptSMS === 'function') {
+        twilio.sendTshirtReceiptSMS(createdOrder).catch(err => console.error('T-Shirt SMS error:', err.message));
+      }
 
       res.json({
         success: true,
