@@ -147,6 +147,7 @@ const committeeData = [
   { number: 4, nameMr: 'श्री. अभिषेक उगले', nameEn: 'Shri Abhishek Ugale', designationMr: 'उपाध्यक्ष', designationEn: 'Vice President', image: '/images/committee/abhishek_ugale.png' },
   { number: 5, nameMr: 'श्री. चंद्रकांत सांगळे', nameEn: 'Shri Chandrakant Sangale', designationMr: 'उपाध्यक्ष', designationEn: 'Vice President', image: '/images/committee/chandrakant_sangle.png' },
   { number: 7, nameMr: 'श्री. निलेश पटेल', nameEn: 'Shri Nilesh Patel', designationMr: 'सचिव', designationEn: 'Secretary', image: '/images/committee/nilesh_patel.png' },
+  { number: 8, nameMr: 'श्री. सर्वेश सांगळे', nameEn: 'Shri Sarvesh Sangle', designationMr: 'सचिव', designationEn: 'Secretary', image: '/images/committee/sarvesh_sangle.jpg' },
   { number: 9, nameMr: 'श्री. महेश यमकर', nameEn: 'Shri Mahesh Yamkar', designationMr: 'सहसचिव', designationEn: 'Joint Secretary', image: '/images/committee/mahesh_yamkar.png' },
   { number: 10, nameMr: 'श्री. भुपेंद्र पवार', nameEn: 'Shri Bhupendra Pawar', designationMr: 'सहसचिव', designationEn: 'Joint Secretary', image: '/images/committee/bhupendra_pawar.png' },
   { number: 11, nameMr: 'श्री. सुनिल घुगे', nameEn: 'Shri Sunil Ghuge', designationMr: 'सहसचिव', designationEn: 'Joint Secretary', image: '/images/committee/sunil_ghuge.png' },
