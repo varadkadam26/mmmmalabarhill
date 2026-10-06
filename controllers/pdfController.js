@@ -2,6 +2,23 @@ const PDFDocument = require('pdfkit');
 const path = require('path');
 const fs = require('fs');
 
+const logoPath = path.join(__dirname, '../public/images/logo.png');
+
+// Helper to render subtle background logo watermark on PDF receipts
+const drawWatermark = (doc) => {
+  if (fs.existsSync(logoPath)) {
+    try {
+      doc.save();
+      doc.opacity(0.12);
+      // Center watermark logo on standard A4 page (595 x 842 pt)
+      doc.image(logoPath, (595 - 280) / 2, 220, { width: 280 });
+      doc.restore();
+    } catch (err) {
+      console.error('PDF watermark error:', err.message);
+    }
+  }
+};
+
 module.exports = {
   generateDonationPDF(donation, res) {
     const doc = new PDFDocument({ size: 'A4', margin: 40 });
@@ -10,6 +27,9 @@ module.exports = {
     res.setHeader('Content-Disposition', `attachment; filename=Receipt_${donation.receipt_no}.pdf`);
 
     doc.pipe(res);
+
+    // Draw Background Watermark Logo
+    drawWatermark(doc);
 
     // Header Box
     doc.rect(40, 40, 515, 100).fill('#4A0404');
@@ -29,15 +49,15 @@ module.exports = {
     };
 
     drawField('Receipt Number', donation.receipt_no, 60, 205);
-    drawField('Donation Date', new Date(donation.created_at).toLocaleDateString('en-IN', { dateStyle: 'medium' }), 300, 205);
+    drawField('Donation Date', new Date(donation.created_at || Date.now()).toLocaleDateString('en-IN', { dateStyle: 'medium' }), 300, 205);
 
     drawField('Donor Full Name', donation.donor_name, 60, 250);
     drawField('Contact Phone', donation.phone, 300, 250);
 
     drawField('PAN Number (80G)', donation.pan_number || 'NOT PROVIDED', 60, 295);
-    drawField('Seva Category', donation.category, 300, 295);
+    drawField('Seva Category', donation.category || 'General Mandal Seva', 300, 295);
 
-    drawField('Razorpay Payment ID', donation.payment_id || 'pay_Simulated123', 60, 340);
+    drawField('Payment UTR / Ref', donation.payment_id || donation.payment_utr || 'N/A', 60, 340);
     drawField('Transaction Status', donation.status || 'SUCCESS', 300, 340);
 
     // Amount Highlight Card
@@ -67,6 +87,9 @@ module.exports = {
 
     doc.pipe(res);
 
+    // Draw Background Watermark Logo
+    drawWatermark(doc);
+
     // Header Banner
     doc.rect(40, 40, 515, 100).fill('#800020');
     doc.fillColor('#FFD700').fontSize(18).font('Helvetica-Bold').text('SHREE BAL GOPAL GANESHUTSAV MANDAL', 55, 52, { width: 485 });
@@ -85,7 +108,7 @@ module.exports = {
     };
 
     drawField('Order Token Number', order.receipt_no, 60, 205);
-    drawField('Order Date', new Date(order.created_at).toLocaleDateString('en-IN', { dateStyle: 'medium' }), 300, 205);
+    drawField('Order Date', new Date(order.created_at || Date.now()).toLocaleDateString('en-IN', { dateStyle: 'medium' }), 300, 205);
 
     drawField('Buyer Full Name', order.buyer_name, 60, 250);
     drawField('Contact Mobile', order.phone, 300, 250);
@@ -93,7 +116,7 @@ module.exports = {
     drawField('Selected Size', `${order.size} (Chest Fit)`, 60, 295);
     drawField('T-Shirt Color & Qty', `${order.color} (${order.quantity} Pcs)`, 300, 295);
 
-    drawField('Payment ID / Ref', order.payment_id || 'pay_SimulatedTshirt', 60, 340);
+    drawField('Payment UTR / Ref', order.payment_id || 'N/A', 60, 340);
     drawField('Delivery / Pickup Option', order.address || 'Mandap Counter Pickup', 300, 340, 220);
 
     // Highlight Total Amount
@@ -132,6 +155,9 @@ module.exports = {
       doc.on('data', chunk => buffers.push(chunk));
       doc.on('end', () => resolve(Buffer.concat(buffers)));
       doc.on('error', err => reject(err));
+
+      // Draw Background Watermark Logo
+      drawWatermark(doc);
 
       // Header Box
       doc.rect(40, 40, 515, 100).fill('#4A0404');
