@@ -32,7 +32,7 @@
         <div style="display: flex; justify-content: center; gap: 1.5rem; border-top: 1px solid var(--border-subtle); padding-top: 1.2rem;">
           <div>
             <span style="font-size: 0.8rem; color: var(--text-light); text-transform: uppercase;"><span data-i18n="tshirt_price_label">प्रति टी-शर्ट किंमत</span></span>
-            <h4 style="font-size: 1.8rem; color: var(--temple-maroon); margin: 0;">₹३२०/-</h4>
+            <h4 style="font-size: 1.8rem; color: var(--temple-maroon); margin: 0;">₹३५०/-</h4>
           </div>
         </div>
       </div>
@@ -89,10 +89,10 @@
                 <span data-i18n="tshirt_color_label">रंग (Color)</span>
               </label>
               <div style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-gold); font-size: 0.95rem; background: var(--bg-cream); color: var(--temple-maroon); font-weight: 700; display: flex; align-items: center; gap: 8px;">
-                <span style="display: inline-block; width: 18px; height: 18px; border-radius: 50%; background: #800020; border: 2px solid var(--royal-gold);"></span>
-                रॉयल मरून (Royal Maroon)
+                <span style="display: inline-block; width: 18px; height: 18px; border-radius: 50%; background: #000000; border: 2px solid var(--royal-gold);"></span>
+                ब्लॅक कॉलर पोलो (Black Polo)
               </div>
-              <input type="hidden" id="tshirtColor" value="Royal Maroon">
+              <input type="hidden" id="tshirtColor" value="Black Polo">
             </div>
           </div>
 
@@ -141,7 +141,7 @@
       const buyerPhone = document.getElementById('buyerPhone').value.trim();
       const tshirtSize = document.getElementById('tshirtSize').value;
       const tshirtColor = document.getElementById('tshirtColor').value;
-      const totalAmount = qty * 320;
+      const totalAmount = qty * 350;
 
       try {
         const confirmRes = await fetch('/tshirt/confirm', {
