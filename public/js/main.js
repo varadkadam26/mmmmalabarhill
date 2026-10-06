@@ -493,6 +493,16 @@ document.addEventListener('DOMContentLoaded', () => {
       feat1: 'काष्ठ सिंहासन: पेशवाई नक्षीकाम',
       feat2: 'डिजिटल: २४/७ लाईव्ह दर्शन',
       feat3: 'कर सवलत: ८०जी देणगी पावती'
+    },
+    '2026': {
+      yearTag: 'वर्ष २०२६',
+      subhead: 'सुवर्ण तेज व राजेशाही आगमन',
+      title: 'मलबार हिलचा राजा २०२६ - सुवर्ण तेज दर्शन',
+      desc: 'सन २०२६ च्या गणेशोत्सवातील मलबार हिलच्या राजाचे मनमोहक, भव्य दिव्य आणि अलौकिक सुवर्ण रूप दर्शन.',
+      image: '/images/malabar_ganpati_2026.png',
+      feat1: 'वर्ष: २०२६',
+      feat2: 'रूप: राजेशाही अलौकिक सुवर्ण तेज',
+      feat3: 'स्थान: मलबार हिल'
     }
   };
 
@@ -503,7 +513,8 @@ document.addEventListener('DOMContentLoaded', () => {
     '2015': {yearTag:'Year 2015', subhead:'Heritage Showcase', title:'Grand Royal Idol Presentation', desc:'A heritage-themed presentation of the idol with a traditional royal aesthetic.', image:'/images/malabar_ganpati_02.jpg', feat1:'Darshan: Grand Idol', feat2:'Craft: Traditional Artisans', feat3:'Decor: Royal Motifs'},
     '2020': {yearTag:'Year 2020', subhead:'Health & Seva', title:'Health Service & Community Support', desc:'A service-focused milestone highlighting health support and community care.', image:'/images/malabar_ganpati_01.jpg', feat1:'Service: Health Support', feat2:'Community: Seva', feat3:'Care: Devotee Assistance'},
     '2024': {yearTag:'Year 2024', subhead:'Golden Throne Adornment', title:'Golden Throne & Radiant Darshan', desc:'A grand darshan presentation featuring ornate adornment and a festive setting.', image:'/images/malabar_ganpati_03.jpg', feat1:'Throne: Ornate Craft', feat2:'Attire: Festive Adornment', feat3:'Darshan: Devotional Experience'},
-    '2025': {yearTag:'Year 2025', subhead:'Royal Woodcraft & Digital Darshan', title:'Carved Throne & Digital Darshan Portal', desc:'A modern milestone combining traditional woodcraft aesthetics with digital darshan access.', image:'/images/malabar_ganpati_04.jpg', feat1:'Craft: Traditional Woodwork', feat2:'Digital: Live Darshan', feat3:'Seva: Online Support'}
+    '2025': {yearTag:'Year 2025', subhead:'Royal Woodcraft & Digital Darshan', title:'Carved Throne & Digital Darshan Portal', desc:'A modern milestone combining traditional woodcraft aesthetics with digital darshan access.', image:'/images/malabar_ganpati_04.jpg', feat1:'Craft: Traditional Woodwork', feat2:'Digital: Live Darshan', feat3:'Seva: Online Support'},
+    '2026': {yearTag:'Year 2026', subhead:'Golden Radiance & Royal Darshan', title:'Malabar Hill Cha Raja 2026 - Divine Golden Darshan', desc:'The majestic, divine, and enchanting golden idol form of Malabar Hill Cha Raja for Ganeshotsav 2026.', image:'/images/malabar_ganpati_2026.png', feat1:'Year: 2026', feat2:'Darshan: Royal Divine Radiance', feat3:'Location: Malabar Hill'}
   };
 
   function setActiveTimelineYear(year) {
