@@ -187,6 +187,31 @@
       </div>
     </div>
 
+    <!-- Our Sponsors & Advertisers Section -->
+    <% if (typeof ads !== 'undefined' && ads.length > 0) { %>
+    <div style="margin-top: 4rem; padding-top: 3rem; border-top: 2px dashed var(--border-gold);">
+      <div style="text-align: center; margin-bottom: 2.5rem;">
+        <span class="section-badge" style="background: rgba(212, 175, 55, 0.15); color: var(--primary-saffron); border: 1px solid var(--royal-gold);">
+          <span class="lang-mr">आमचे प्रायोजक</span>
+          <span class="lang-en">Our Sponsors</span>
+        </span>
+        <h2 style="font-size: 2rem; color: var(--temple-maroon); margin-top: 0.5rem;">
+          <span class="lang-mr">आमचे प्रायोजक व जाहिरातदार</span>
+          <span class="lang-en">Our Sponsors & Advertisers</span>
+        </h2>
+        <div class="gold-divider"></div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; justify-items: center;">
+        <% ads.forEach(function(ad) { %>
+          <div class="card-temple" style="padding: 0.5rem; background: var(--bg-white); border-radius: var(--radius-lg); border: 1px solid var(--gold-soft); box-shadow: var(--shadow-sm); overflow: hidden; width: 100%;">
+            <img src="/images/ads/<%= ad %>" alt="Sponsor" loading="lazy" style="width: 100%; height: auto; display: block; border-radius: var(--radius-sm);">
+          </div>
+        <% }); %>
+      </div>
+    </div>
+    <% } %>
+
   </div>
 </section>
 

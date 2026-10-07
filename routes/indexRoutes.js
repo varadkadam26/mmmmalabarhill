@@ -22,12 +22,26 @@ router.get('/social-work', yatraController.renderSocialWorkPage);
 // Executive Committee Page (Public - Separate from Admin Login)
 router.get('/committee', yatraController.renderCommitteePage);
 
+const fs = require('fs');
+const path = require('path');
+
 // Advertisement Page
 router.get('/advertisement', (req, res) => {
+  let ads = [];
+  try {
+    const adsDir = path.join(__dirname, '../public/images/ads');
+    if (fs.existsSync(adsDir)) {
+      ads = fs.readdirSync(adsDir).filter(file => file.endsWith('.jpg') || file.endsWith('.png'));
+    }
+  } catch (err) {
+    console.error("Error reading ads directory:", err);
+  }
+  
   res.render('advertisement', {
     title: 'Sponsorship & Souvenir Advertisement | Malabar Hill Cha Raja',
     metaDescription: 'Partner with Malabar Hill Cha Raja for Ganeshotsav souvenir advertisements, banner sponsorships, and digital brand visibility reaching lakhs of devotees.',
-    activeTab: 'advertisement'
+    activeTab: 'advertisement',
+    ads: ads
   });
 });
 
